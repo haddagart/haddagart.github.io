@@ -1,0 +1,12 @@
+{%- assign here = include.current -%}
+<nav class="subnav" aria-label="Blog sections">
+  <div class="wrap subnav__row">
+    <a class="subnav__crumb" href="{{ '/blog/' | relative_url }}">Blog</a>
+    <ul class="subnav__list">
+      <li><a href="{{ '/blog/' | relative_url }}"{% if here == 'articles' %} aria-current="page"{% endif %}>{% include icon.html name="file-text" %}<span>Articles</span></a></li>
+      <li><a href="{{ '/blog/series/' | relative_url }}"{% if here == 'series' %} aria-current="page"{% endif %}>{% include icon.html name="news" %}<span>Series and special issues</span></a></li>
+      <li><a href="{{ '/blog/journal/' | relative_url }}"{% if here == 'journal' %} aria-current="page"{% endif %}>{% include icon.html name="pencil" %}<span>Thoughts and journal</span></a></li>
+    </ul>
+    <span class="subnav__ink" aria-hidden="true"></span>
+  </div>
+</nav>

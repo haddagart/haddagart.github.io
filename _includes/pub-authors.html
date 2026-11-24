@@ -1,0 +1,1 @@
+{%- for a in include.authors -%}{%- if a contains 'Haddag' -%}<strong class="pub__me">{{ a }}</strong>{%- else -%}{{ a }}{%- endif -%}{%- unless forloop.last -%}, {% endunless -%}{%- endfor -%}

@@ -1,0 +1,8 @@
+{%- assign pr = include.project -%}
+<article class="rcard rcard--project" data-reveal>
+  <div class="rcard__top">{% include status.html status=pr.status %}{% if pr.period %}<span class="rcard__meta">{{ pr.period }}</span>{% endif %}</div>
+  <h3 class="rcard__title"><a href="{{ pr.url | relative_url }}">{{ pr.title }}</a></h3>
+  <p class="rcard__text">{{ pr.summary }}</p>
+  {% if pr.themes %}<ul class="chips chips--sm" aria-label="Themes">{% for t in pr.themes %}<li class="chip">{{ t }}</li>{% endfor %}</ul>{% endif %}
+  <p class="rcard__foot"><span>{% include icon.html name="file-text" %}{{ pr.publications | size }} related publications</span><a class="pub__btn" href="{{ pr.url | relative_url }}">Open project{% include icon.html name="arrow-right" %}</a></p>
+</article>

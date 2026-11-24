@@ -1,0 +1,14 @@
+{%- assign p = include.project -%}
+{%- assign dd = site.data.disciplines | where: "key", p.discipline | first -%}
+<li class="work" data-work data-title="{{ p.title | downcase | escape }}" data-date="{{ p.date | date: '%Y-%m-%d' }}" data-area="{{ dd.title }}" data-status="{{ p.status }}" data-kind="{{ p.kind }}" data-license="{{ p.license }}" data-year="{{ p.year }}" data-platforms="{{ p.platforms | join: '|' | escape }}" data-stack="{{ p.stack | join: '|' | escape }}" data-topics="{{ p.topics | join: '|' | escape }}">
+  <a class="work__media" href="{{ p.url | relative_url }}" tabindex="-1" aria-hidden="true"{% if p.accent %} style="--tint: {{ p.accent }}"{% endif %}><span class="work__mark">{% if p.image %}<img src="{{ p.image | relative_url }}" alt="" width="96" height="96" loading="lazy">{% else %}<b>{{ p.title | slice: 0, 1 | upcase }}</b>{% endif %}</span></a>
+  <div class="work__body">
+    <h3 class="work__title"><a href="{{ p.url | relative_url }}">{{ p.title }}</a>{% if p.status %}<span class="status status--{{ p.status }} statusdot" role="img" aria-label="{% if p.status == 'ongoing' %}Ongoing{% else %}Ended{% endif %}" title="{% if p.status == 'ongoing' %}Ongoing{% else %}Ended{% endif %}"><span class="status__dot" aria-hidden="true"></span></span>{% endif %}</h3>
+    <p class="work__summary">{{ p.summary }}</p>
+    <p class="work__meta">{% if p.kind %}<span>{{ p.kind }}</span>{% endif %}{% if p.year %}{% if p.kind %}<span aria-hidden="true">·</span>{% endif %}<span>{{ p.year }}</span>{% endif %}</p>
+    {%- if p.stack %}
+    <ul class="chips chips--sm work__chips" aria-label="Built with">{% for s in p.stack limit: 4 %}<li class="chip">{{ s }}</li>{% endfor %}</ul>
+    {%- endif %}
+  </div>
+  <span class="work__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+</li>

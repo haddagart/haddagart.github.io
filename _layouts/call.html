@@ -1,0 +1,34 @@
+---
+layout: default
+---
+{%- assign ct = site.data.call_types | where: "key", page.call_type | first -%}
+<article class="pubpage callpage">
+  <header class="page-hero">
+    <div class="wrap">
+      <a class="backlink" href="{{ '/research/calls/' | relative_url }}">{% include icon.html name="arrow-left" %}<span>All calls</span></a>
+      <p class="eyebrow">{% include icon.html name=ct.icon %} {{ ct.singular }}</p>
+      <h1>{{ page.title }}</h1>
+      <p class="projectpage__status">{% if page.status == 'open' %}<span class="status status--ongoing"><span class="status__dot" aria-hidden="true"></span><span class="status__text">Open</span></span>{% else %}<span class="status status--ended"><span class="status__dot" aria-hidden="true"></span><span class="status__text">Closed</span></span>{% endif %}</p>
+      <p class="lead">{{ page.summary }}</p>
+    </div>
+  </header>
+  <div class="zigzag zigzag--top" aria-hidden="true"></div>
+  <div class="wrap section">
+    <div class="pubpage__grid">
+      <div class="prose">{{ content }}</div>
+      <aside class="pubpage__side" aria-label="Call details">
+        <h2>{% if page.status == 'open' %}Apply or reply{% else %}This call is closed{% endif %}</h2>
+        <ul class="linklist">
+          {% if page.status == 'open' %}<li><a class="btn btn--primary btn--sm" href="{{ page.apply | default: '/work-with-me/' | relative_url }}">{% include icon.html name="mail" %}<span>{{ page.apply_label | default: 'Get in touch' }}</span></a></li>{% endif %}
+          {% if page.project %}<li><a class="btn btn--ghost btn--sm" href="{{ '/research/projects/' | append: page.project | append: '/' | relative_url }}">{% include icon.html name="microscope" %}<span>Related project</span></a></li>{% endif %}
+        </ul>
+        <dl class="facts">
+          {% if page.deadline %}<dt>Deadline</dt><dd><time datetime="{{ page.deadline | date: '%Y-%m-%d' }}">{{ page.deadline | date: "%-d %B %Y" }}</time></dd>{% else %}<dt>Deadline</dt><dd>Rolling</dd>{% endif %}
+          {% if page.location %}<dt>Where</dt><dd>{{ page.location }}</dd>{% endif %}
+          {% if page.commitment %}<dt>Commitment</dt><dd>{{ page.commitment }}</dd>{% endif %}
+          {% if page.eligibility %}<dt class="is-block">Who</dt><dd class="is-block">{{ page.eligibility }}</dd>{% endif %}
+        </dl>
+      </aside>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,45 @@
+# Institutions shown with a round logo. `logo` is optional: drop the file in assets/img/orgs/ and keep the path.
+# If the file is missing the badge falls back to the short mark, so nothing breaks.
+- key: ustomb
+  name: "University of Sciences and Technology of Oran - Mohamed Boudiaf (USTOMB)"
+  short: "USTOMB"
+  mark: "USTO"
+  url: "https://www.univ-usto.dz/"
+  logo: /assets/img/orgs/ustomb.png
+  city: "Oran, Algeria"
+- key: uca
+  name: "Universidad de Cádiz"
+  short: "UCA"
+  mark: "UCA"
+  url: "https://www.uca.es/"
+  logo: /assets/img/orgs/uca.png
+  city: "Cádiz, Spain"
+- key: kbs
+  name: "Knowledge-Based Systems"
+  short: "KBS"
+  mark: "KBS"
+  url: "https://www.sciencedirect.com/journal/knowledge-based-systems"
+- key: lyon2
+  name: "Université Lumière Lyon 2"
+  short: "Lyon 2"
+  mark: "L2"
+  url: "https://www.univ-lyon2.fr/"
+  logo: /assets/img/orgs/lyon2.png
+  city: "Lyon, France"
+- key: essal
+  name: "Essal Institute"
+  short: "Essal"
+  mark: "E"
+- key: sonatrach
+  name: "Sonatrach Management Academy"
+  short: "Sonatrach"
+  mark: "SMA"
+- key: formatec
+  name: "Formatec Institute"
+  short: "Formatec"
+  mark: "F"
+- key: iwann
+  name: "International Work-Conference on Artificial Neural Networks (IWANN 2025)"
+  short: "IWANN"
+  mark: "IW"
+  url: "https://iwann.uma.es/"

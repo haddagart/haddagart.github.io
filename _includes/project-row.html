@@ -1,0 +1,10 @@
+{%- assign pr = include.project -%}
+<li class="crow">
+  <div class="crow__main">
+    <h3 class="crow__title"><a href="{{ pr.url | relative_url }}">{{ pr.title }}</a></h3>
+    <p class="crow__text">{{ pr.summary }}</p>
+    <p class="crow__meta">{% include status.html status=pr.status %}{% if pr.period %}<span aria-hidden="true">·</span><span>{{ pr.period }}</span>{% endif %}<span aria-hidden="true">·</span><span>{{ pr.publications | size }} related {% if pr.publications.size == 1 %}publication{% else %}publications{% endif %}</span></p>
+    {% if pr.themes %}<ul class="chips chips--sm" aria-label="Themes">{% for t in pr.themes %}<li class="chip">{{ t }}</li>{% endfor %}</ul>{% endif %}
+  </div>
+  <span class="crow__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+</li>

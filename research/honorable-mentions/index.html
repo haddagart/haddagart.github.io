@@ -1,0 +1,33 @@
+---
+layout: research
+rsection: people
+title: Honorable mentions
+description: "The supervisors, host professors and colleagues who shaped the academic path of Haddag Abdelkader."
+---
+
+{%- assign allpubs = site.publications | sort: "date" | reverse -%}
+<ul class="persons">
+  {% for m in site.data.people %}
+  {%- assign o = site.data.orgs | where: "key", m.org | first -%}
+  <li class="person" data-reveal>
+    {% include avatar.html initial=m.initial photo=m.photo sz="lg" %}
+    <div class="person__main">
+      <div class="person__head">
+        <div class="person__who">
+          <h2 class="person__name">{{ m.name }}</h2>
+          {% if o %}<p class="person__org">{% include org-badge.html org=m.org sz="sm" label="no" %}<span class="person__orgtext"><span class="person__uni">{{ o.name }}</span><span class="person__sub">{% if m.affiliation and m.affiliation != "" %}{{ m.affiliation }}{% if o.city %} · {% endif %}{% endif %}{{ o.city }}</span></span></p>{% endif %}
+        </div>
+        {% if m.handles %}<p class="person__links">{% for h in m.handles %}{% include handle.html type=h.type url=h.url name=m.name %}{% endfor %}</p>{% endif %}
+      </div>
+      {% if m.roles %}<ul class="person__tags" aria-label="How we worked together">{% for r in m.roles %}<li>{{ r }}</li>{% endfor %}</ul>{% endif %}
+      {% if m.note %}<p class="person__note">{{ m.note }}</p>{% endif %}
+      {% if m.works %}
+      <details class="person__works">
+        <summary>{{ m.works.size }} {% if m.works.size == 1 %}paper{% else %}papers{% endif %} together</summary>
+        <ol>{% for p in allpubs %}{% if m.works contains p.slug %}<li><a href="{{ p.url | relative_url }}">{{ p.title }}</a><span>{{ p.when }}</span></li>{% endif %}{% endfor %}</ol>
+      </details>
+      {% endif %}
+    </div>
+  </li>
+  {% endfor %}
+</ul>

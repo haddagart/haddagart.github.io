@@ -1,0 +1,10 @@
+# Professional service. Groups: reviewing | boards | committees. A group with no entries is hidden.
+# Each entry lists its roles; a role has its own from/to (year, or "present").
+reviewing:
+  - name: "Knowledge-Based Systems"
+    publisher: "Elsevier"
+    org: kbs
+    roles:
+      - { role: "Peer reviewer", from: 2025, to: present }
+boards: []
+committees: []

@@ -1,0 +1,84 @@
+# roles: one or more titles. handles: optional profile links. type = orcid | scholar | researchgate | linkedin | github | web | email | x
+#   example:  handles:
+#               - { type: orcid, url: "https://orcid.org/0000-0000-0000-0000" }
+#               - { type: scholar, url: "https://scholar.google.com/citations?user=XXXX" }
+# photo: optional face; drop the file in assets/img/people/ and keep the path (a missing file falls back to the initial).
+# Honorable mentions: the people behind my academic path. Shown on /research/honorable-mentions/.
+# group: guides | hosts | colleagues.  works: slugs of _publications files you worked on together (optional).
+- name: "Dr. Hayat Yedjour"
+  initial: H
+  org: ustomb
+  photo: /assets/img/people/hayat-yedjour.jpg
+  handles:
+    - { type: orcid, url: "https://orcid.org/0009-0003-7929-6982" }
+  group: guides
+  roles: ["Ph.D. supervisor", "Co-author"]
+  affiliation: "SIMPA (Signal, Image, Parole) Laboratory"
+  note: "Guides my doctoral research on bio-inspired video understanding and co-authors much of my work."
+  works: [correlation-snn-motion-boundary, surrogate-gradients-spiking-neurons, human-action-recognition-snn, human-optical-flow-yolov8]
+- name: "Prof. Elisa Guerrero Vázquez"
+  initial: E
+  org: uca
+  photo: /assets/img/people/elisa-guerrero-vazquez.jpg
+  handles:
+    - { type: orcid, url: "https://orcid.org/0000-0002-8320-0811" }
+    - { type: web, url: "https://produccioncientifica.uca.es/investigadores/112724/detalle?lang=en" }
+  group: hosts
+  roles: ["Erasmus+ host professor", "Co-author"]
+  affiliation: "Escuela Superior de Ingeniería"
+  note: "Welcomed me for an Erasmus+ research stay and co-authored papers with me."
+  works: [surrogate-gradients-spiking-neurons, human-action-recognition-snn, event-based-trajectory-prediction]
+- name: "Dr. Maria de la Paz Guerrero Lebrero"
+  initial: M
+  org: uca
+  photo: /assets/img/people/maria-de-la-paz.jpg
+  group: colleagues
+  roles: ["Erasmus+ co-receiving professor", "Co-author"]
+  affiliation: ""
+  handles:
+    - { type: scholar, url: "https://scholar.google.com/citations?user=sBn-dCsAAAAJ&hl=en" }
+- name: "Prof. Laure Tougne Rodet"
+  initial: L
+  org: lyon2
+  photo: /assets/img/people/laure-tougne-rodet.jpg
+  group: hosts
+  roles: ["Short-term stay"]
+  affiliation: "LIRIS, Imagine team"
+  handles:
+    - { type: scholar, url: "https://scholar.google.com/citations?user=ecaeLFYAAAAJ&hl=en" }
+    - { type: orcid, url: "https://orcid.org/0000-0001-9208-6275" }
+    - { type: web, url: "https://perso.liris.cnrs.fr/laure.tougne" }
+- name: "Prof. Carlos Crispim-Junior"
+  initial: C
+  org: lyon2
+  photo: /assets/img/people/carlos-crispim-junior.jpg
+  group: hosts
+  roles: ["Short-term stay"]
+  affiliation: "LIRIS, Imagine team"
+  handles:
+    - { type: scholar, url: "https://scholar.google.com/citations?user=UwZieOoAAAAJ&hl=en" }
+    - { type: linkedin, url: "https://www.linkedin.com/in/carlos-crispim-junior-a1778a93/" }
+    - { type: dblp, url: "https://dblp.org/pid/47/11313.html" }
+    - { type: web, url: "https://perso.liris.cnrs.fr/ccrispim" }
+- name: "Prof. Nacéra Benamrane"
+  initial: B
+  org: ustomb
+  photo: /assets/img/people/n-benamrane.jpg
+  handles:
+    - { type: orcid, url: "https://orcid.org/0000-0003-0086-3300" }
+  group: guides
+  roles: ["Master's supervisor"]
+  affiliation: ""
+  note: "Supervised my master's thesis on mammary cytology image analysis."
+  works: [mammary-cytology-images-analysis]
+- name: "Prof. Yedjour Dounia"
+  initial: D
+  org: ustomb
+  photo: /assets/img/people/dounia-yedjour.jpg
+  group: colleagues
+  roles: ["Co-author"]
+  affiliation: "SIMPA (Signal, Image, Parole) Laboratory"
+  handles:
+    - { type: scholar, url: "https://scholar.google.com/citations?user=C5IinW0AAAAJ&hl=fr" }
+    - { type: orcid, url: "https://orcid.org/0000-0002-2272-5315" }
+    - { type: dblp, url: "https://dblp.org/pid/230/6386" }

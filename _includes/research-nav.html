@@ -1,0 +1,17 @@
+{%- assign here = include.current -%}
+{%- assign opencalls = site.calls | where: "status", "open" -%}
+<nav class="subnav" aria-label="Research sections">
+  <div class="wrap subnav__row">
+    <a class="subnav__crumb" href="{{ '/research/' | relative_url }}">Research</a>
+    <ul class="subnav__list">
+      <li><a href="{{ '/research/' | relative_url }}"{% if here == 'overview' %} aria-current="page"{% endif %}>{% include icon.html name="compass" %}<span>Overview</span></a></li>
+      <li><a href="{{ '/research/projects/' | relative_url }}"{% if here == 'projects' %} aria-current="page"{% endif %}>{% include icon.html name="microscope" %}<span>Projects</span></a></li>
+      <li><a href="{{ '/research/contributions/' | relative_url }}"{% if here == 'contributions' %} aria-current="page"{% endif %}>{% include icon.html name="file-text" %}<span>Contributions</span></a></li>
+      <li><a href="{{ '/research/supervision/' | relative_url }}"{% if here == 'supervision' %} aria-current="page"{% endif %}>{% include icon.html name="school" %}<span>Supervision</span></a></li>
+      <li><a href="{{ '/research/service/' | relative_url }}"{% if here == 'service' %} aria-current="page"{% endif %}>{% include icon.html name="eye" %}<span>Service</span></a></li>
+      <li><a href="{{ '/research/honorable-mentions/' | relative_url }}"{% if here == 'people' %} aria-current="page"{% endif %}>{% include icon.html name="users" %}<span>Honorable mentions</span></a></li>
+      <li class="subnav__end"><a class="subnav__calls" href="{{ '/research/calls/' | relative_url }}"{% if here == 'calls' %} aria-current="page"{% endif %}>{% include icon.html name="news" %}<span>Calls</span>{% if opencalls.size > 0 %}<i class="subnav__dot" title="{{ opencalls.size }} open"></i>{% endif %}</a></li>
+    </ul>
+    <span class="subnav__ink" aria-hidden="true"></span>
+  </div>
+</nav>

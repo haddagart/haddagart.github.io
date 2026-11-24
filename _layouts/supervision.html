@@ -1,0 +1,47 @@
+---
+layout: default
+---
+<article class="pubpage supvpage">
+  <header class="page-hero">
+    <div class="wrap">
+      <a class="backlink" href="{{ '/research/supervision/' | relative_url }}">{% include icon.html name="arrow-left" %}<span>All supervision</span></a>
+      <p class="eyebrow">{{ page.level }} project · {{ page.academic_year }}</p>
+      <h1>{{ page.title }}</h1>
+      <p class="supvpage__meta">{% include role-badge.html role=page.role %}</p>
+      <p class="lead">{{ page.summary }}</p>
+    </div>
+  </header>
+  <div class="zigzag zigzag--top" aria-hidden="true"></div>
+  <div class="wrap section">
+    <div class="pubpage__grid">
+      <div class="prose">
+        <h2 id="about">About the project</h2>
+        {{ content }}
+        {% if page.topics %}<h2 id="topics">Keywords</h2><ul class="chips">{% for t in page.topics %}<li class="chip">{{ t }}</li>{% endfor %}</ul>{% endif %}
+        {% if page.references %}
+        <h2 id="refs">Starting references</h2>
+        <ol class="refs">{% for r in page.references %}<li>{{ r.text }}{% if r.doi %} <a href="https://doi.org/{{ r.doi }}" rel="noopener" target="_blank">doi:{{ r.doi }}</a>{% endif %}</li>{% endfor %}</ol>
+        {% endif %}
+        <aside class="notice" aria-label="Looking for a supervisor">
+          {% include icon.html name="compass" %}
+          <div>
+            <h2>Want a project like this?</h2>
+            <p>If you're a student looking for a supervisor, check my calls for student projects, or send me your idea.</p>
+            <p><a class="btn btn--primary btn--sm" href="{{ '/research/calls/#student' | relative_url }}"><span>See student calls</span>{% include icon.html name="arrow-right" %}</a></p>
+          </div>
+        </aside>
+      </div>
+      <aside class="pubpage__side" aria-label="Project details">
+        <h2>Students</h2>
+        <ul class="people">{% for s in page.students %}<li>{{ s }}<small>{{ page.level }}</small></li>{% endfor %}</ul>
+        <dl class="facts">
+          {% if page.with %}<dt class="is-block">Co-supervised with</dt><dd class="is-block">{{ page.with }}</dd>{% endif %}
+          <dt class="is-block">Institution</dt><dd class="is-block">{% include org-badge.html org=page.org sz="sm" %}</dd>
+        </dl>
+        {% if page.with %}<ul class="linklist linklist--after">
+          <li><a class="btn btn--ghost btn--sm" href="{{ '/research/honorable-mentions/' | relative_url }}">{% include icon.html name="users" %}<span>Meet {{ page.with }}</span></a></li>
+        </ul>{% endif %}
+      </aside>
+    </div>
+  </div>
+</article>

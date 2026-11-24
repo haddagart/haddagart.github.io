@@ -1,0 +1,21 @@
+---
+layout: default
+---
+{%- assign s = site.data.series | where: "slug", page.series_id | first -%}
+{%- assign sp = site.posts | where: "series", page.series_id | sort: "series_part" -%}
+<div class="wrap section section--research">
+  <div class="prose prose--wide research">
+    <p class="eyebrow">{{ s.kind }} · {{ sp.size }} {% if sp.size == 1 %}post{% else %}posts{% endif %}</p>
+    <h1 class="series__title">{{ s.title }}</h1>
+    <p class="series__lead">{{ s.description }}</p>
+    {% if sp.size > 0 %}
+    {% include blog-bar.html n=sp.size noun="posts" placeholder="Search this series" %}
+    <ul class="crows">
+      {% for p in sp %}{% include post-row.html p=p part=true %}{% endfor %}
+    </ul>
+    {% include blog-end.html %}
+    {% else %}
+    <div class="emptypage emptypage--sub">{% include empty-state.html icon="pencil" title="The first parts are coming soon" text="This series is being written. Parts will appear here as they are published." href="/blog/" label="Browse the blog" %}</div>
+    {% endif %}
+  </div>
+</div>

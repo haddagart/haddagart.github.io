@@ -1,0 +1,23 @@
+<section class="cta cta--me clay-host" aria-labelledby="cta-title">
+  <div class="clay-layer" aria-hidden="true">
+    {% include clay.html name="pyramid" x="64%" y="24%" s="clamp(3rem, 6vw, 5rem)" r="8" d="1.1" cls="clay--lg" %}
+    {% include clay.html name="sphere" x="58%" y="82%" s="clamp(1.8rem, 3.2vw, 2.6rem)" r="0" d="1.5" cls="clay--md" %}
+  </div>
+  <span class="cta__halo" aria-hidden="true"></span>
+  <img class="cta__avatar" src="{{ '/assets/img/avatar-3d.webp' | relative_url }}" width="495" height="976" alt="" loading="lazy" decoding="async">
+  <div class="cta__body">
+    <p class="cta__eyebrow">Let's work together</p>
+    <h2 id="cta-title">Let's make something worth citing.</h2>
+    <p class="cta__text">Bring a question, a dataset, a student, or half an idea. A short message is all it takes to start.</p>
+    <ul class="cta__ways" aria-label="Ways to work together">
+      <li>{% include icon.html name="pencil" %}Co-author a paper</li>
+      <li>{% include icon.html name="school" %}Supervise a thesis</li>
+      <li>{% include icon.html name="microscope" %}Share data or ideas</li>
+      <li>{% include icon.html name="microphone" %}Review or invite me to speak</li>
+    </ul>
+    <p class="cta__actions">
+      <a class="btn btn--primary" href="{{ '/work-with-me/' | relative_url }}">{% include icon.html name="mail" %}<span>Start a conversation</span>{% include icon.html name="arrow-right" %}</a>
+      {% if include.secondary == 'projects' %}<a class="btn btn--ghost cta__ghost" href="{{ '/research/projects/' | relative_url }}"><span>See my projects</span></a>{% else %}<a class="btn btn--ghost cta__ghost" href="{{ '/research/calls/' | relative_url }}"><span>See open calls</span></a>{% endif %}
+    </p>
+  </div>
+</section>

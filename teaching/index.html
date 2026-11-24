@@ -1,0 +1,45 @@
+---
+layout: research
+title: Teaching
+description: "Teaching by Haddag Abdelkader: university courses at USTOMB, professional training for companies and institutes, and lectures and talks, in person and online."
+---
+{%- assign talks = site.data.teaching.talks -%}
+{%- assign academic = site.courses | where: "kind", "academic" | size -%}
+{%- assign professional = site.courses | where: "kind", "professional" | size -%}
+<p class="research__intro">I teach by example: a concrete problem first, the theory when it's needed. Here's where I've taught, trained and spoken, and whether it was in person or online.</p>
+
+<section aria-labelledby="tmap">
+  <h2 id="tmap">Where to start</h2>
+  <div class="hubgrid">
+    <a class="hubcard lit" href="{{ '/teaching/academic-courses/' | relative_url }}" data-reveal>
+      <span class="hubcard__bg" aria-hidden="true">{% include icon.html name="school" %}</span>
+      <h3>Academic courses</h3>
+      <p>University courses and tutorial sections I've taught at USTOMB.</p>
+      <span class="hubcard__count"><b>{{ academic }}</b> courses</span>
+      <span class="hubcard__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+    </a>
+    <a class="hubcard lit" href="{{ '/teaching/professional-courses/' | relative_url }}" data-reveal>
+      <span class="hubcard__bg" aria-hidden="true">{% include icon.html name="building" %}</span>
+      <h3>Professional courses</h3>
+      <p>Hands-on training in programming and data tools for institutes and companies.</p>
+      <span class="hubcard__count"><b>{{ professional }}</b> courses</span>
+      <span class="hubcard__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+    </a>
+    <a class="hubcard lit" href="{{ '/teaching/lectures-and-talks/' | relative_url }}" data-reveal>
+      <span class="hubcard__bg" aria-hidden="true">{% include icon.html name="presentation" %}</span>
+      <h3>Guest lectures and talks</h3>
+      <p>Guest lectures and talks, in person or online.</p>
+      <span class="hubcard__count"><b>{{ talks.size }}</b> {% if talks.size == 1 %}lecture{% else %}lectures{% endif %}</span>
+      <span class="hubcard__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+    </a>
+  </div>
+</section>
+
+<aside class="notice" aria-label="Train with me">
+  {% include icon.html name="bulb" %}
+  <div>
+    <h2>Need a course designed for your team?</h2>
+    <p>I build short, practical courses around your own data and tools, in person or online.</p>
+    <p><a class="btn btn--primary btn--sm" href="{{ '/work-with-me/' | relative_url }}"><span>Start a conversation</span>{% include icon.html name="arrow-right" %}</a></p>
+  </div>
+</aside>

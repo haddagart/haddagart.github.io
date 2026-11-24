@@ -1,0 +1,7 @@
+# Types of open call. Order = order of the filter row on /research/calls/.
+- { key: position,      label: "Positions",            singular: "Position",       icon: users }
+- { key: student,       label: "Student projects",     singular: "Student project", icon: school }
+- { key: collaboration, label: "Collaborations",       singular: "Collaboration",  icon: compass }
+- { key: coauthors,     label: "Co-authors",           singular: "Co-authors",     icon: pencil }
+- { key: funding,       label: "Funding & grants",     singular: "Funding",        icon: bulb }
+- { key: review,        label: "Reviewers & speakers", singular: "Review / talk",  icon: microphone }

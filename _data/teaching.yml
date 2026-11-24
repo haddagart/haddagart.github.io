@@ -1,0 +1,9 @@
+# Guest lectures and talks only (no conferences or symposiums).
+# modes: list of in-person | online | hybrid. Optional: slides, recording (URLs, shown only if set).
+talks:
+  - title: "A Dive into Machine Learning – A Guide for Future Researchers and Engineers"
+    type: "Guest lecture"
+    modes: [in-person]
+    place: "Escuela Superior de Ingeniería, Universidad de Cádiz"
+    audience: "final-year Master's students"
+    date: 2025-01-15

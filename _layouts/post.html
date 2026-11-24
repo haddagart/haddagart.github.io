@@ -1,0 +1,30 @@
+---
+layout: default
+---
+{%- assign words = content | strip_html | number_of_words -%}
+{%- assign mins = words | divided_by: 220 | plus: 1 -%}
+{%- if page.series -%}
+{%- assign s = site.data.series | where: "slug", page.series | first -%}
+{%- assign sp = site.posts | where: "series", page.series | sort: "series_part" -%}
+{%- assign prevpart = page.series_part | minus: 1 -%}{%- assign nextpart = page.series_part | plus: 1 -%}
+{%- endif -%}
+<article>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">{% if page.collection == 'news' %}News{% elsif page.series %}<a href="{{ '/blog/series/' | append: page.series | append: '/' | relative_url }}">{{ s.title }}</a> · Part {{ page.series_part }}{% elsif page.type == 'journal' %}Journal{% else %}Blog{% endif %} · <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time>{% if page.collection != 'news' %} · {{ mins }} min read{% endif %}</p>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+    </div>
+  </header>
+  <div class="wrap section"><div class="postgrid" data-postgrid><div class="prose" data-prose>{{ content }}</div><aside class="toc" data-toc aria-label="On this page" hidden></aside></div>
+  {%- if page.series %}
+    <nav class="seriesnav" aria-label="{{ s.title }}">
+      <p class="seriesnav__title"><a href="{{ '/blog/series/' | append: page.series | append: '/' | relative_url }}">{{ s.title }}</a> · {{ sp.size }} {% if sp.size == 1 %}post{% else %}posts{% endif %}</p>
+      <div class="seriesnav__row">
+        {% for q in sp %}{% if q.series_part == prevpart %}<a class="seriesnav__a seriesnav__a--prev" href="{{ q.url | relative_url }}">{% include icon.html name="arrow-left" %}<span><small>Previous · Part {{ q.series_part }}</small>{{ q.title }}</span></a>{% endif %}{% endfor %}
+        {% for q in sp %}{% if q.series_part == nextpart %}<a class="seriesnav__a seriesnav__a--next" href="{{ q.url | relative_url }}"><span><small>Next · Part {{ q.series_part }}</small>{{ q.title }}</span>{% include icon.html name="arrow-right" %}</a>{% endif %}{% endfor %}
+      </div>
+    </nav>
+  {%- endif %}
+  </div>
+</article>

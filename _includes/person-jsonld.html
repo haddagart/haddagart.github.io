@@ -1,0 +1,16 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Haddag Abdelkader",
+  "url": "{{ site.url }}{{ site.baseurl }}/",
+  "image": "{{ '/assets/img/haddag-portrait.jpg' | absolute_url }}",
+  "jobTitle": "AI Engineer and Ph.D. researcher",
+  "description": {{ site.description | jsonify }},
+  {% if site.affiliation %}"affiliation": { "@type": "CollegeOrUniversity", "name": {{ site.affiliation.name | jsonify }} },
+  "workLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "streetAddress": {{ site.affiliation.street | jsonify }}, "addressLocality": {{ site.affiliation.city | jsonify }}, "postalCode": {{ site.affiliation.postal | jsonify }}, "addressRegion": {{ site.affiliation.region | jsonify }}, "addressCountry": {{ site.affiliation.country_code | jsonify }} } },
+  {% endif %}"knowsAbout": ["Artificial intelligence", "Deep learning", "Computer vision", "AI agents"],
+  "identifier": { "@type": "PropertyValue", "propertyID": "ORCID", "value": "0000-0002-6481-0999" },
+  "sameAs": [{% for s in site.data.social %}"{{ s.url }}"{% unless forloop.last %}, {% endunless %}{% endfor %}]
+}
+</script>

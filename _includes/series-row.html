@@ -1,0 +1,10 @@
+{%- assign s = include.s -%}
+{%- assign cnt = site.posts | where: "series", s.slug | size -%}
+<li class="crow prow" data-brow data-text="{{ s.title | append: ' ' | append: s.description | append: ' ' | append: s.kind | downcase | escape }}">
+  <div class="crow__main">
+    <h2 class="crow__title"><a href="{{ '/blog/series/' | append: s.slug | append: '/' | relative_url }}">{{ s.title }}</a></h2>
+    <p class="crow__text">{{ s.description }}</p>
+    <p class="crow__meta"><span class="prow__kind">{{ s.kind }}</span><span aria-hidden="true">·</span><span>{{ cnt }} {% if cnt == 1 %}post{% else %}posts{% endif %}</span></p>
+  </div>
+  <span class="crow__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+</li>

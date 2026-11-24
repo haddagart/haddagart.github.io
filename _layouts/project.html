@@ -1,0 +1,42 @@
+---
+layout: default
+---
+<article class="pubpage projectpage" itemscope itemtype="https://schema.org/ResearchProject">
+  <header class="page-hero">
+    <div class="wrap">
+      <a class="backlink" href="{{ '/research/projects/' | relative_url }}">{% include icon.html name="arrow-left" %}<span>All projects</span></a>
+      <p class="eyebrow">Research project{% if page.period %} · {{ page.period }}{% endif %}</p>
+      <h1 itemprop="name">{{ page.title }}</h1>
+      <p class="projectpage__status">{% include status.html status=page.status %}</p>
+      <p class="lead" itemprop="description">{{ page.summary }}</p>
+    </div>
+  </header>
+  <div class="zigzag zigzag--top" aria-hidden="true"></div>
+  <div class="wrap section">
+    <div class="pubpage__grid">
+      <div class="prose">
+        {{ content }}
+        {% if page.themes %}<h2 id="themes">Themes</h2><ul class="chips">{% for t in page.themes %}<li class="chip">{{ t }}</li>{% endfor %}</ul>{% endif %}
+        <h2 id="outputs">Contributions from this project</h2>
+        <ol class="minipubs">
+          {% assign sorted = site.publications | sort: "date" | reverse %}
+          {% for p in sorted %}{% if page.publications contains p.slug %}{% include pub-mini.html pub=p %}{% endif %}{% endfor %}
+        </ol>
+      </div>
+      <aside class="pubpage__side" aria-label="Project details">
+        <h2>Get involved</h2>
+        <ul class="linklist">
+          <li><a class="btn btn--primary btn--sm" href="{{ '/work-with-me/' | relative_url }}">{% include icon.html name="mail" %}<span>Collaborate on this</span></a></li>
+          {% if page.repo %}<li><a class="btn btn--ghost btn--sm" href="{{ page.repo }}" rel="noopener" target="_blank">{% include icon.html name="code" %}<span>Code</span></a></li>{% endif %}
+          <li><a class="btn btn--ghost btn--sm" href="{{ '/research/calls/' | relative_url }}">{% include icon.html name="news" %}<span>Open calls</span></a></li>
+        </ul>
+        <dl class="facts">
+          {% if page.lab %}<dt class="is-block">Lab</dt><dd class="is-block">{% if page.org %}{% include org-badge.html org=page.org sz="sm" %}{% endif %}<span class="facts__lab">{{ page.lab }}</span></dd>{% endif %}
+          {% if page.role %}<dt>Role</dt><dd>{{ page.role }}</dd>{% endif %}
+          {% if page.funding %}<dt class="is-block">Funding</dt><dd class="is-block">{{ page.funding }}</dd>{% endif %}
+          {% if page.collaborators %}<dt class="is-block">With</dt><dd class="is-block">{{ page.collaborators | join: ', ' }}</dd>{% endif %}
+        </dl>
+      </aside>
+    </div>
+  </div>
+</article>

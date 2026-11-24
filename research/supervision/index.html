@@ -1,0 +1,34 @@
+---
+layout: research
+rsection: supervision
+title: Supervision
+description: "Student projects and theses supervised or co-supervised by Haddag Abdelkader at USTOMB: human tracking, segmentation and bio-inspired video analysis."
+---
+{%- assign items = site.supervision | sort: "date" | reverse -%}
+
+<aside class="notice notice--top notice--slim" aria-label="Looking for a supervisor">
+  {% include icon.html name="compass" %}
+  <p><strong>Looking for a supervisor?</strong> Have a look at my open calls, or send me your idea.</p>
+  <a class="btn btn--primary btn--sm" href="{{ '/research/calls/#student' | relative_url }}"><span>See student calls</span>{% include icon.html name="arrow-right" %}</a>
+</aside>
+
+<section aria-labelledby="sup">
+  <h2 id="sup">Student projects <small class="research__count">{{ items.size }}</small></h2>
+  <ol class="timeline">
+    {% for it in items %}
+    <li class="timeline__item" data-reveal>
+      <p class="timeline__when"><span>{{ it.academic_year }}</span></p>
+      <article class="rcard timeline__card">
+        <div class="rcard__top">{% include role-badge.html role=it.role %}<span class="rcard__meta">{{ it.level }}</span></div>
+        <h3 class="rcard__title"><a href="{{ it.url | relative_url }}">{{ it.title }}</a></h3>
+        <p class="rcard__text">{{ it.summary }}</p>
+        {% if it.students %}<p class="timeline__students">{% include icon.html name="users" %}<span>{{ it.students | join: ", " }}</span></p>{% endif %}
+        <p class="rcard__foot">{% include org-badge.html org=it.org sz="sm" %}<a class="pub__btn" href="{{ it.url | relative_url }}">Details{% include icon.html name="arrow-right" %}</a></p>
+      </article>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+
+
+{% include research-cta.html %}

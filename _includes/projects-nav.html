@@ -1,0 +1,12 @@
+{%- assign here = include.current -%}
+<nav class="subnav" aria-label="Project areas">
+  <div class="wrap subnav__row">
+    <a class="subnav__crumb" href="{{ '/projects/' | relative_url }}"{% if here == 'all' %} aria-current="page"{% endif %}>Projects</a>
+    <ul class="subnav__list">
+      {%- for d in site.data.disciplines %}
+      <li><a href="{{ '/projects/' | append: d.key | append: '/' | relative_url }}"{% if here == d.key %} aria-current="page"{% endif %}>{% include icon.html name=d.icon %}<span>{{ d.title }}</span></a></li>
+      {%- endfor %}
+    </ul>
+    <span class="subnav__ink" aria-hidden="true"></span>
+  </div>
+</nav>

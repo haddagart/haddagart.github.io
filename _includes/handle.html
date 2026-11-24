@@ -1,0 +1,10 @@
+{%- assign icon = "link" -%}{%- assign label = "Website" -%}
+{%- if include.type == "orcid" %}{% assign icon = "id" %}{% assign label = "ORCID" %}{% endif -%}
+{%- if include.type == "scholar" %}{% assign icon = "brand-google-scholar" %}{% assign label = "Google Scholar" %}{% endif -%}
+{%- if include.type == "researchgate" %}{% assign icon = "users" %}{% assign label = "ResearchGate" %}{% endif -%}
+{%- if include.type == "linkedin" %}{% assign icon = "brand-linkedin" %}{% assign label = "LinkedIn" %}{% endif -%}
+{%- if include.type == "github" %}{% assign icon = "brand-github" %}{% assign label = "GitHub" %}{% endif -%}
+{%- if include.type == "x" %}{% assign icon = "brand-x" %}{% assign label = "X" %}{% endif -%}
+{%- if include.type == "dblp" %}{% assign icon = "file-text" %}{% assign label = "DBLP" %}{% endif -%}
+{%- if include.type == "email" %}{% assign icon = "mail" %}{% assign label = "Email" %}{% endif -%}
+<a class="handle" href="{{ include.url }}" rel="me noopener" target="_blank" aria-label="{{ include.name }} on {{ label }}" title="{{ label }}">{% include icon.html name=icon %}</a>

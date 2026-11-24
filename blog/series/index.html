@@ -1,0 +1,15 @@
+---
+layout: research
+title: Series and special issues
+description: "Multi-part series and special issues on the blog of Haddag Abdelkader, with the number of posts in each."
+---
+{%- assign n = site.data.series.size -%}
+{% if n > 0 %}
+{% include blog-bar.html n=n noun="series" placeholder="Search series" %}
+  <ul class="crows">
+    {% for s in site.data.series %}{% include series-row.html s=s %}{% endfor %}
+  </ul>
+{% include blog-end.html %}
+{% else %}
+<div class="emptypage emptypage--sub">{% include empty-state.html icon="news" title="Series are coming soon" text="Multi-part guides that build an idea step by step will be listed here." href="/blog/" label="Browse the blog" href2="/research/" label2="Explore my research" %}</div>
+{% endif %}

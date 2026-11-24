@@ -1,0 +1,40 @@
+{%- assign list = site.courses | where: "kind", include.kind | sort: "title" -%}
+{%- assign formats = list | map: "format" | uniq | sort -%}
+{%- assign levels = list | map: "levels" | join: "," | split: "," | uniq | sort -%}
+{%- assign topics = list | map: "topics" | join: "," | split: "," | uniq | sort -%}
+<div class="catalog" data-catalog>
+  <div class="catalog__bar">
+    <p class="catalog__count" aria-live="polite"><b data-n>{{ list.size }}</b> of {{ list.size }} courses</p>
+    <div class="catalog__tools">
+      <label class="catalog__search"><span class="sr-only">Search courses</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" placeholder="Search courses" data-q autocomplete="off">
+      </label>
+      <button class="catalog__filterbtn" type="button" aria-expanded="false" aria-controls="cat-panel" data-fbtn>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h3M11 12h9M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+        <span class="sr-only">Filters</span><i class="catalog__badge" data-fcount hidden>0</i>
+      </button>
+    </div>
+    <div class="catalog__panel" id="cat-panel" data-panel hidden>
+      <fieldset><legend>How it runs</legend>
+        <label><input type="checkbox" data-f="modes" value="in-person"> In person</label>
+        <label><input type="checkbox" data-f="modes" value="online"> Online</label>
+        <label><input type="checkbox" data-f="modes" value="hybrid"> Hybrid</label>
+      </fieldset>
+      <fieldset><legend>Type</legend>
+        {% for f in formats %}<label><input type="checkbox" data-f="format" value="{{ f | downcase }}"> {{ f }}</label>{% endfor %}
+      </fieldset>
+      {% if levels.size > 0 %}<fieldset><legend>Level</legend>
+        {% for l in levels %}{% if l != "" %}<label><input type="checkbox" data-f="levels" value="{{ l | downcase }}"> {{ l }}</label>{% endif %}{% endfor %}
+      </fieldset>{% endif %}
+      <fieldset><legend>Topic</legend>
+        {% for t in topics %}<label><input type="checkbox" data-f="topics" value="{{ t | downcase }}"> {{ t }}</label>{% endfor %}
+      </fieldset>
+      <p class="catalog__panelfoot"><button type="button" class="btn btn--ghost btn--sm" data-clear>Clear filters</button></p>
+    </div>
+  </div>
+  <ul class="crows">
+    {% for c in list %}{% include course-card.html course=c %}{% endfor %}
+  </ul>
+  <p class="catalog__empty" data-empty hidden>No course matches. Clear a filter{% if include.kind == 'professional' %}, or <a href="#custom">ask for a custom course</a>{% endif %}.</p>
+</div>

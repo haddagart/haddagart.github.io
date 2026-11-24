@@ -1,0 +1,21 @@
+---
+layout: research
+rsection: projects
+title: Research projects
+description: "Research projects of Haddag Abdelkader: bio-inspired motion vision with spiking neural networks and explainable breast cytology image analysis, with status and related publications."
+---
+{%- assign ongoing = site.research_projects | where: "status", "ongoing" -%}
+{%- assign ended = site.research_projects | where: "status", "ended" -%}
+
+<section aria-labelledby="p-on">
+  <h2 id="p-on">Ongoing <small class="research__count">{{ ongoing.size }}</small></h2>
+  {% if ongoing.size > 0 %}<ul class="crows">{% for pr in ongoing %}{% include project-row.html project=pr %}{% endfor %}</ul>{% else %}{% include empty-state.html icon="microscope" title="Nothing in progress right now" text="New projects will be announced here. If you have an idea to explore together, I would love to hear it." href="/work-with-me/" label="Tell me your idea" %}{% endif %}
+</section>
+{% if ended.size > 0 %}
+<section aria-labelledby="p-end">
+  <h2 id="p-end">Ended <small class="research__count">{{ ended.size }}</small></h2>
+  <ul class="crows">{% for pr in ended %}{% include project-row.html project=pr %}{% endfor %}</ul>
+</section>
+{% endif %}
+
+{% include research-cta.html %}

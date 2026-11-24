@@ -1,0 +1,62 @@
+---
+layout: default
+---
+{%- assign back = '/teaching/academic-courses/' -%}{%- if page.kind == 'professional' %}{% assign back = '/teaching/professional-courses/' %}{% endif -%}
+<article class="pubpage supvpage">
+  <header class="page-hero">
+    <div class="wrap">
+      <a class="backlink" href="{{ back | relative_url }}">{% include icon.html name="arrow-left" %}<span>{% if page.kind == 'professional' %}All professional courses{% else %}All academic courses{% endif %}</span></a>
+      <p class="eyebrow">{% if page.kind == 'professional' %}{{ page.format }}{% else %}{{ page.levels | join: ", " }} · {{ page.format }}{% endif %}</p>
+      <h1>{{ page.title }}</h1>
+      <p class="supvpage__meta">{% include mode-badges.html modes=page.modes %}</p>
+      <p class="lead">{{ page.summary }}</p>
+    </div>
+  </header>
+  <div class="zigzag zigzag--top" aria-hidden="true"></div>
+  <div class="wrap section">
+    <div class="pubpage__grid">
+      <div class="prose">
+        <h2 id="about">About the course</h2>
+        {{ content }}
+        {% if page.outline %}
+        <h2 id="outline">What it covers</h2>
+        <ol class="outline">{% for o in page.outline %}<li>{{ o }}</li>{% endfor %}</ol>
+        {% endif %}
+        {% if page.kind == 'academic' %}
+        <h2 id="resources">Course resources</h2>
+        {% if page.resources and page.resources.size > 0 %}
+        <ul class="resources">
+          {% for r in page.resources %}
+          <li class="rcard"><div class="rcard__top"><strong>{{ r.title }}</strong><span class="rcard__meta">{{ r.type }}</span></div>{% if r.note %}<p class="rcard__text">{{ r.note }}</p>{% endif %}<p class="rcard__foot"><span></span><a class="pub__btn" href="{{ r.url }}" rel="noopener" target="_blank">Open{% include icon.html name="external-link" %}</a></p></li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="resources__empty">Lecture notes, tutorial sheets and past exams will be posted here. Enrolled students will also find them on the course space.</p>
+        {% endif %}
+        {% endif %}
+        {% if page.topics %}<h2 id="topics">Topics</h2><ul class="chips">{% for t in page.topics %}<li class="chip">{{ t }}</li>{% endfor %}</ul>{% endif %}
+        {% if page.clients and page.clients.size > 0 %}
+        <h2 id="clients">{% if page.kind == 'professional' %}Clients who requested this course{% else %}Taught at{% endif %}</h2>
+        <ul class="clients">{% for cl in page.clients %}<li>{% include org-badge.html org=cl.org sz="lg" %}</li>{% endfor %}</ul>
+        {% endif %}
+        {% if page.request %}
+        <h2 id="request">Request this course</h2>
+        {% include course-request.html course=page.title %}
+        {% endif %}
+      </div>
+      <aside class="pubpage__side" aria-label="Course details">
+        <dl class="facts">
+          <dt>Offered</dt><dd class="facts__modes">{% include mode-badges.html modes=page.modes %}</dd>
+          <dt>Type</dt><dd>{{ page.format }}</dd>
+          {% if page.levels.size > 0 %}<dt>Level</dt><dd>{{ page.levels | join: ", " }}</dd>{% endif %}
+          <dt>My role</dt><dd>{{ page.role }}</dd>
+        </dl>
+        <ul class="linklist">
+          {% if page.request %}<li><a class="btn btn--primary btn--sm" href="#request"><span>Request this course</span>{% include icon.html name="arrow-right" %}</a></li>{% endif %}
+          <li><a class="btn btn--ghost btn--sm" href="{{ back | relative_url }}">{% include icon.html name="arrow-left" %}<span>Back to catalog</span></a></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</article>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":{{ page.title | jsonify }},"description":{{ page.summary | jsonify }},"url":"{{ page.url | absolute_url }}","provider":{"@type":"Person","name":"Haddag Abdelkader","url":"{{ '/' | absolute_url }}"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":[{% for m in page.modes %}"{% if m == 'online' %}Online{% elsif m == 'hybrid' %}Blended{% else %}Onsite{% endif %}"{% unless forloop.last %},{% endunless %}{% endfor %}]}}</script>

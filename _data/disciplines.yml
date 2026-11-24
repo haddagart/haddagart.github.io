@@ -1,0 +1,17 @@
+# Sub-sections of the Projects page. To add a discipline, add an entry here and a page at projects/<key>/index.md
+# (layout: projects, discipline: <key>). A project joins one with `discipline: <key>` in its front matter.
+- key: software
+  title: Software
+  icon: code
+  empty_title: Software projects are on the way
+  empty_text: Tools, apps and open experiments will be showcased here.
+- key: design
+  title: Design
+  icon: palette
+  empty_title: Design work is on the way
+  empty_text: Brand, interface and visual design projects will be showcased here.
+- key: more
+  title: More
+  icon: bulb
+  empty_title: More is on the way
+  empty_text: Projects that do not fit a single discipline will appear here.

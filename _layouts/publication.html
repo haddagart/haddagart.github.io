@@ -1,0 +1,55 @@
+---
+layout: default
+---
+{%- assign ptype = site.data.publication_types | where: "key", page.type | first -%}
+<article class="pubpage" itemscope itemtype="https://schema.org/{{ ptype.schema | default: 'ScholarlyArticle' }}">
+  <header class="page-hero">
+    <div class="wrap">
+      <a class="backlink" href="{{ '/research/contributions/' | relative_url }}">{% include icon.html name="arrow-left" %}<span>All contributions</span></a>
+      <p class="eyebrow">{% include icon.html name=ptype.icon %} {{ ptype.singular }} · {{ page.when }}</p>
+      <h1 itemprop="name">{{ page.title }}</h1>
+      <p class="pub__authors">{% include pub-authors.html authors=page.authors %}</p>
+      <p class="lead pub__venue">{% include pub-venue.html pub=page %}</p>
+      {% if page.doi %}<p class="pub__doi"><span>DOI</span><a href="https://doi.org/{{ page.doi }}" rel="noopener" target="_blank" itemprop="sameAs">{{ page.doi }}</a></p>{% endif %}
+    </div>
+  </header>
+  <div class="zigzag zigzag--top" aria-hidden="true"></div>
+  <div class="wrap section">
+    <div class="pubpage__grid">
+      <div class="prose">
+        {% if page.note %}<p class="pub__note">{% include icon.html name="eye" %}<span>{{ page.note }}</span></p>{% endif %}
+        {% if page.abstract and page.abstract != "" %}
+        <h2 id="abstract">Abstract</h2>
+        <p itemprop="abstract">{{ page.abstract }}</p>
+        {% else %}
+        <p class="pub__muted">No abstract is published for this item yet.</p>
+        {% endif %}
+        {% if page.keywords %}
+        <h2 id="keywords">Keywords</h2>
+        <ul class="chips">{% for k in page.keywords %}<li class="chip">{{ k }}</li>{% endfor %}</ul>
+        {% endif %}
+        {{ content }}
+        <h2 id="cite">Cite</h2>
+        <div class="bib">
+          <div class="bib__bar"><span>BibTeX</span><span class="bib__tools"><button class="iconbtn" type="button" data-wrap="#bibtex" aria-pressed="true" aria-label="Wrap long lines" title="Wrap long lines">{% include icon.html name="text-wrap" %}</button><button class="btn btn--ghost btn--sm" type="button" data-copy="#bibtex">{% include icon.html name="copy" class="bib__i1" %}{% include icon.html name="check" class="bib__i2" %}<span data-copy-label>Copy</span></button></span></div>
+          <pre id="bibtex"><code>{{ page.bibtex | strip }}</code></pre>
+        </div>
+        {% if page.corresponding %}<p class="pub__foot">Corresponding author: {{ page.corresponding }}.</p>{% endif %}
+      </div>
+      <aside class="pubpage__side" aria-label="Links and details">
+        <h2>Links</h2>
+        <ul class="linklist">
+          {% if page.link %}<li><a class="btn btn--primary btn--sm" href="{{ page.link }}" rel="noopener" target="_blank">{% include icon.html name="external-link" %}<span>{{ page.linklabel | default: 'Publisher page' }}</span></a></li>{% endif %}
+          <li><a class="btn btn--ghost btn--sm" href="{{ '/research/contributions/' | relative_url }}">{% include icon.html name="microscope" %}<span>More contributions</span></a></li>
+        </ul>
+        {%- assign e_pub = page.publisher -%}{%- if page.type == 'conference' or page.type == 'thesis' %}{%- assign e_pub = nil -%}{%- endif %}
+        {%- if e_pub or page.editors %}
+        <dl class="facts">
+          {% if e_pub %}<dt class="is-block">Publisher</dt><dd class="is-block">{{ e_pub }}</dd>{% endif %}
+          {% if page.editors %}<dt class="is-block">Editors</dt><dd class="is-block">{{ page.editors | join: ', ' }}</dd>{% endif %}
+        </dl>
+        {%- endif %}
+      </aside>
+    </div>
+  </div>
+</article>

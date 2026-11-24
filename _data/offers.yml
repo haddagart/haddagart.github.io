@@ -1,0 +1,22 @@
+# One source for the offers shown on Home and on /work-with-me/. Edit freely.
+# `icon` is the name of a Tabler icon file in _includes/icons/.
+- title: Research collaboration
+  icon: users
+  who: Labs, researchers, co-authors
+  summary: Joint work in deep learning, computer vision and AI agents.
+- title: Supervision & mentoring
+  icon: compass
+  who: Students and early-career researchers
+  summary: Thesis, internship and project guidance.
+- title: Professional training
+  icon: presentation
+  who: Companies and institutions
+  summary: Hands-on courses designed around your team, taught by example.
+- title: Consulting
+  icon: bulb
+  who: Teams with a hard AI problem
+  summary: Problem framing, prototypes and technical review.
+- title: Talks & reviewing
+  icon: microphone
+  who: Conferences, meetups, journals
+  summary: Invited talks, workshops and peer review.

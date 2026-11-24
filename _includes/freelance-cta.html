@@ -1,0 +1,19 @@
+<section class="cta cta--freelance clay-host" aria-labelledby="fl-title">
+  <div class="clay-layer" aria-hidden="true">
+    {% include clay.html name="cube" x="86%" y="30%" s="clamp(3rem, 6vw, 5rem)" r="12" d="1.1" cls="clay--lg" %}
+    {% include clay.html name="sphere" x="72%" y="78%" s="clamp(1.8rem, 3.2vw, 2.6rem)" r="0" d="1.5" cls="clay--md" %}
+  </div>
+  <div class="cta__body">
+    <p class="cta__eyebrow"><span class="status status--ongoing"><span class="status__dot" aria-hidden="true"></span><span class="status__text">Open to freelance</span></span></p>
+    <h2 id="fl-title">Have something that needs building?</h2>
+    <p class="cta__text">I take on freelance projects. Tell me what you have in mind and I'll reply with how I would approach it, what it takes and when I could start.</p>
+    <ul class="cta__ways" aria-label="Areas I freelance in">
+      {%- for d in site.data.disciplines %}
+      <li>{% include icon.html name=d.icon %}{{ d.title }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="cta__actions">
+      <a class="btn btn--primary" href="{{ '/work-with-me/' | relative_url }}">{% include icon.html name="mail" %}<span>Start a freelance project</span>{% include icon.html name="arrow-right" %}</a>
+    </p>
+  </div>
+</section>

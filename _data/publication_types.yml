@@ -1,0 +1,7 @@
+# Order here = order on /research/. schema = schema.org type used in JSON-LD.
+- { key: journal,      label: "Journal articles",         singular: "Journal article",  icon: file-text,    schema: ScholarlyArticle }
+- { key: conference,   label: "Conference papers",        singular: "Conference paper", icon: presentation, schema: ScholarlyArticle }
+- { key: symposium,    label: "Symposia & doctoral days", singular: "Symposium paper",  icon: users,        schema: ScholarlyArticle }
+- { key: preprint,     label: "Preprints & unpublished",  singular: "Preprint",         icon: pencil,       schema: ScholarlyArticle }
+- { key: presentation, label: "Presentations",            singular: "Presentation",     icon: microphone,   schema: PresentationDigitalDocument }
+- { key: thesis,       label: "Thesis",                   singular: "Master's thesis",  icon: school,       schema: Thesis }

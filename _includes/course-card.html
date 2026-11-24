@@ -1,0 +1,10 @@
+{%- assign c = include.course -%}
+{%- assign tj = c.topics | join: " " -%}
+<li class="crow" data-reveal data-course data-modes="{{ c.modes | join: '|' }}" data-format="{{ c.format | downcase }}" data-levels="{{ c.levels | join: '|' | downcase }}" data-topics="{{ c.topics | join: '|' | downcase }}" data-text="{{ c.title | append: ' ' | append: c.summary | append: ' ' | append: tj | downcase | escape }}">
+  <div class="crow__main">
+    <h3 class="crow__title"><a href="{{ c.url | relative_url }}">{{ c.title }}</a></h3>
+    <p class="crow__text">{{ c.summary }}</p>
+    <p class="crow__meta">{% include mode-badges.html modes=c.modes %}<span>{{ c.format }}{% if c.levels.size > 0 %} · {{ c.levels | join: ", " }}{% endif %}</span></p>
+  </div>
+  <span class="crow__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+</li>

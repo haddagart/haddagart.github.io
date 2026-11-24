@@ -1,0 +1,12 @@
+{%- comment -%} Count + search (+ optional month timeline, built by JS). Params: n, noun, placeholder, timeline {%- endcomment -%}
+<div class="blogbar" data-browser>
+  {% if include.timeline %}<div class="tline" data-tline hidden aria-label="Browse by month"></div>{% endif %}
+  <div class="catalog__bar">
+    <p class="catalog__count" aria-live="polite"><b data-n>{{ include.n }}</b> of {{ include.n }} {{ include.noun }}</p>
+    <div class="catalog__tools">
+      <label class="catalog__search"><span class="sr-only">{{ include.placeholder }}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" placeholder="{{ include.placeholder }}" data-q autocomplete="off">
+      </label>
+    </div>
+  </div>

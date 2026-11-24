@@ -1,0 +1,13 @@
+{%- comment -%} Friendly empty state. Params: icon, title, text, href, label, href2, label2 {%- endcomment -%}
+{%- assign e_icon = include.icon -%}{%- assign e_title = include.title -%}{%- assign e_text = include.text -%}{%- assign e_href = include.href -%}{%- assign e_label = include.label -%}{%- assign e_href2 = include.href2 -%}{%- assign e_label2 = include.label2 -%}
+<div class="emptystate">
+  <span class="emptystate__icon" aria-hidden="true">{% include icon.html name=e_icon %}</span>
+  <h2 class="emptystate__title">{{ e_title }}</h2>
+  <p class="emptystate__text">{{ e_text }}</p>
+  {%- if e_href %}
+  <p class="emptystate__actions">
+    <a class="btn btn--primary btn--sm" href="{{ e_href | relative_url }}"><span>{{ e_label }}</span>{% include icon.html name="arrow-right" %}</a>
+    {%- if e_href2 %}<a class="btn btn--ghost btn--sm" href="{{ e_href2 | relative_url }}"><span>{{ e_label2 }}</span></a>{% endif %}
+  </p>
+  {%- endif %}
+</div>

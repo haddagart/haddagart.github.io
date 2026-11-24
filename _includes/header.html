@@ -1,0 +1,60 @@
+{%- assign hasdeck = "" -%}{%- if page.url contains '/research/' %}{% assign hasdeck = " has-deck" %}{% endif -%}{%- if page.url contains '/teaching/' %}{% assign hasdeck = " has-deck" %}{% endif -%}{%- if page.url contains '/blog/' %}{% assign hasdeck = " has-deck" %}{% endif -%}{%- assign pu0 = page.url | slice: 0, 10 -%}{%- if pu0 == '/projects/' %}{% assign hasdeck = " has-deck" %}{% endif -%}
+<header class="site-header{{ hasdeck }}">
+  <div class="wrap bar">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Haddag Abdelkader, home">
+      {% include logo.svg %}<span class="brand__name">Haddag Abdelkader</span>
+    </a>
+    <div class="bar__tools">
+      <button class="theme-toggle" type="button" aria-label="Switch theme">
+        {% include icon.html name="sun" class="icon--sun" %}{% include icon.html name="moon" class="icon--moon" %}
+      </button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle__label">Menu</span>
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+    </div>
+    <nav id="site-nav" class="site-nav" aria-label="Primary">
+      <ul>
+        {% for item in site.data.nav.main %}
+        <li><a href="{{ item.url | relative_url }}"{% assign cur = page.url | slice: 0, item.url.size %}{% if cur == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+      <a class="btn btn--primary btn--sm" href="{{ site.data.nav.cta.url | relative_url }}">{{ site.data.nav.cta.title }}</a>
+    </nav>
+  </div>
+  {%- if page.url contains '/research/' -%}
+  {%- assign rs = "overview" -%}
+  {%- if page.url contains '/research/projects/' %}{% assign rs = "projects" %}{% endif -%}
+  {%- if page.url contains '/research/contributions/' %}{% assign rs = "contributions" %}{% endif -%}
+  {%- if page.url contains '/research/supervision/' %}{% assign rs = "supervision" %}{% endif -%}
+  {%- if page.url contains '/research/service/' %}{% assign rs = "service" %}{% endif -%}
+  {%- if page.url contains '/research/honorable-mentions/' %}{% assign rs = "people" %}{% endif -%}
+  {%- if page.url contains '/research/calls/' %}{% assign rs = "calls" %}{% endif -%}
+  <div class="deck">{% include research-nav.html current=rs %}</div>
+  {%- endif %}
+  {%- if page.url contains '/teaching/' -%}
+  {%- assign ts = "overview" -%}
+  {%- if page.url contains '/teaching/academic-courses/' %}{% assign ts = "academic" %}{% endif -%}
+  {%- if page.url contains '/teaching/professional-courses/' %}{% assign ts = "professional" %}{% endif -%}
+  {%- if page.kind == 'academic' %}{% assign ts = "academic" %}{% endif -%}
+  {%- if page.kind == 'professional' %}{% assign ts = "professional" %}{% endif -%}
+  {%- if page.url contains '/teaching/lectures-and-talks/' %}{% assign ts = "talks" %}{% endif -%}
+  <div class="deck">{% include teaching-nav.html current=ts %}</div>
+  {%- endif %}
+  {%- assign pu = page.url | slice: 0, 10 -%}
+  {%- if pu == '/projects/' -%}
+  {%- assign ps = "all" -%}
+  {%- for d in site.data.disciplines %}{% if page.url contains d.key %}{% assign ps = d.key %}{% endif %}{% endfor -%}
+  {%- if page.discipline %}{% assign ps = page.discipline %}{% endif -%}
+  <div class="deck">{% include projects-nav.html current=ps %}</div>
+  {%- endif %}
+  {%- if page.url contains '/blog/' -%}
+  {%- assign bs = "articles" -%}
+  {%- if page.url contains '/blog/series/' %}{% assign bs = "series" %}{% endif -%}
+  {%- if page.url contains '/blog/journal/' %}{% assign bs = "journal" %}{% endif -%}
+  {%- if page.series %}{% assign bs = "series" %}{% endif -%}
+  {%- if page.type == 'journal' %}{% assign bs = "journal" %}{% endif -%}
+  <div class="deck">{% include blog-nav.html current=bs %}</div>
+  {%- endif %}
+  <div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+</header>

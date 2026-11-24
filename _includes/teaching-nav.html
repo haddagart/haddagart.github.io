@@ -1,0 +1,13 @@
+{%- assign here = include.current -%}
+<nav class="subnav" aria-label="Teaching sections">
+  <div class="wrap subnav__row">
+    <a class="subnav__crumb" href="{{ '/teaching/' | relative_url }}">Teaching</a>
+    <ul class="subnav__list">
+      <li><a href="{{ '/teaching/' | relative_url }}"{% if here == 'overview' %} aria-current="page"{% endif %}>{% include icon.html name="compass" %}<span>Overview</span></a></li>
+      <li><a href="{{ '/teaching/academic-courses/' | relative_url }}"{% if here == 'academic' %} aria-current="page"{% endif %}>{% include icon.html name="school" %}<span>Academic courses</span></a></li>
+      <li><a href="{{ '/teaching/professional-courses/' | relative_url }}"{% if here == 'professional' %} aria-current="page"{% endif %}>{% include icon.html name="building" %}<span>Professional courses</span></a></li>
+      <li><a href="{{ '/teaching/lectures-and-talks/' | relative_url }}"{% if here == 'talks' %} aria-current="page"{% endif %}>{% include icon.html name="presentation" %}<span>Guest lectures and talks</span></a></li>
+    </ul>
+    <span class="subnav__ink" aria-hidden="true"></span>
+  </div>
+</nav>

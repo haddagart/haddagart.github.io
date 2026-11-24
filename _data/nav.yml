@@ -1,0 +1,23 @@
+main:
+  - { title: Research, url: /research/ }
+  - { title: Teaching, url: /teaching/ }
+  - { title: Projects, url: /projects/ }
+  - { title: Blog, url: /blog/ }
+  - { title: Store, url: /store/ }
+  - { title: About, url: /about/ }
+cta: { title: Work with me, url: /work-with-me/ }
+footer_extra:
+  - { title: News, url: /news/ }
+  - { title: Work with me, url: /work-with-me/ }
+# Second footer column: grouped links.
+footer_groups:
+  - title: Explore
+    links:
+      - { title: News, url: /news/, icon: news }
+      - { title: Press, url: /press/, icon: microphone }
+      - { title: Brand, url: /brand/, icon: palette }
+      - { title: Work with me, url: /work-with-me/, icon: mail }
+  - title: Legal
+    links:
+      - { title: Copyright, url: /copyright/, icon: file-text }
+      - { title: Privacy, url: /privacy/, icon: eye }

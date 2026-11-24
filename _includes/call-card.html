@@ -1,0 +1,14 @@
+{%- assign cl = include.call -%}
+{%- assign ct = site.data.call_types | where: "key", cl.call_type | first -%}
+<article class="rcard rcard--call{% if cl.status != 'open' %} is-closed{% endif %}" data-reveal data-type="{{ cl.call_type }}">
+  <div class="rcard__top">
+    <span class="calltype">{% include icon.html name=ct.icon %}{{ ct.singular }}</span>
+    {% if cl.status == 'open' %}<span class="status status--ongoing"><span class="status__dot" aria-hidden="true"></span><span class="status__text">Open</span></span>{% else %}<span class="status status--ended"><span class="status__dot" aria-hidden="true"></span><span class="status__text">Closed</span></span>{% endif %}
+  </div>
+  <h3 class="rcard__title"><a href="{{ cl.url | relative_url }}">{{ cl.title }}</a></h3>
+  <p class="rcard__text">{{ cl.summary }}</p>
+  <p class="rcard__foot">
+    <span>{% if cl.deadline %}{% include icon.html name="compass" %}Deadline <time datetime="{{ cl.deadline | date: '%Y-%m-%d' }}">{{ cl.deadline | date: "%-d %b %Y" }}</time>{% else %}{% include icon.html name="compass" %}Rolling{% endif %}</span>
+    <a class="pub__btn" href="{{ cl.url | relative_url }}">Details{% include icon.html name="arrow-right" %}</a>
+  </p>
+</article>

@@ -1,0 +1,2 @@
+{%- assign p = include.pub -%}
+<li class="minipub"><a href="{{ p.url | relative_url }}">{{ p.title }}</a><span>{% include pub-venue.html pub=p %}</span></li>

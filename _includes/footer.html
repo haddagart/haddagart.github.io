@@ -1,0 +1,64 @@
+<footer class="site-footer">
+  <div class="zigzag" aria-hidden="true"></div>
+  <div class="wrap footer-grid">
+    <div class="footer-col footer-col--brand">
+      <div class="footer-brand">
+        <img src="{{ '/assets/img/brand/logo-on-dark.svg' | relative_url }}" alt="Haddag Abdelkader" width="120" height="104" loading="lazy">
+        <p>{{ site.tagline }}.</p>
+      </div>
+      {% if site.affiliation %}
+      <h2 class="footer-title">Contact</h2>
+      <address class="footer-affil">
+        <span class="footer-affil__row">{% include org-badge.html org="ustomb" sz="sm" label="no" %}<span>{% if site.affiliation.lab %}<strong>{{ site.affiliation.lab }}</strong><br>{% endif %}{{ site.affiliation.department }}<br>{{ site.affiliation.faculty }}<br>{{ site.affiliation.name }}</span></span>
+        <span class="footer-affil__row">{% include icon.html name="map-pin" %}<span>{{ site.affiliation.street }}, {{ site.affiliation.postal }} {{ site.affiliation.city }}<br>{{ site.affiliation.region }}, {{ site.affiliation.country }}</span></span>
+        {% if site.affiliation.email_user %}<span class="footer-affil__row">{% include icon.html name="mail" %}<span><a class="email-link" href="{{ '/work-with-me/' | relative_url }}" data-user="{{ site.affiliation.email_user }}" data-domain="{{ site.affiliation.email_domain }}">{{ site.affiliation.email_user }} [at] {{ site.affiliation.email_domain }}</a></span></span>{% endif %}
+      </address>
+      {% endif %}
+    </div>
+    <nav class="footer-col footer-col--links" aria-label="More pages">
+      {% for g in site.data.nav.footer_groups %}
+      <div class="footer-linkgroup">
+        <h2 class="footer-title">{{ g.title }}</h2>
+        <ul class="footer-links">
+          {% for l in g.links %}<li><a href="{{ l.url | relative_url }}">{% include icon.html name=l.icon %}<span>{{ l.title }}</span></a></li>{% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </nav>
+    <div class="footer-col footer-col--social">
+      <h2 class="footer-title" id="find-me">Find me</h2>
+      <nav class="social-nav" aria-labelledby="find-me">
+        {% assign links = site.data.social | where: "group", "research" %}
+        <div class="social-group">
+          <h3 class="social-group__title" id="social-research">Research</h3>
+          <ul class="social-grid" aria-labelledby="social-research">
+            {% for s in links %}<li><a href="{{ s.url }}" rel="me noopener" title="{{ s.label }}" data-tip="{{ s.name }}">{% include icon.html name=s.icon %}<span class="sr-only">{{ s.label }}</span></a></li>{% endfor %}
+          </ul>
+        </div>
+        {% assign links = site.data.social | where: "group", "code" %}
+        <div class="social-group">
+          <h3 class="social-group__title" id="social-code">Code &amp; career</h3>
+          <ul class="social-grid" aria-labelledby="social-code">
+            {% for s in links %}<li><a href="{{ s.url }}" rel="me noopener" title="{{ s.label }}" data-tip="{{ s.name }}">{% include icon.html name=s.icon %}<span class="sr-only">{{ s.label }}</span></a></li>{% endfor %}
+          </ul>
+        </div>
+        {% assign links = site.data.social | where: "group", "media" %}
+        <div class="social-group">
+          <h3 class="social-group__title" id="social-media">Media &amp; social</h3>
+          <ul class="social-grid" aria-labelledby="social-media">
+            {% for s in links %}<li><a href="{{ s.url }}" rel="me noopener" title="{{ s.label }}" data-tip="{{ s.name }}">{% include icon.html name=s.icon %}<span class="sr-only">{{ s.label }}</span></a></li>{% endfor %}
+          </ul>
+        </div>
+        <div class="social-group">
+          <h3 class="social-group__title" id="social-follow">Follow</h3>
+          <ul class="social-grid" aria-labelledby="social-follow">
+            <li><a href="{{ '/feed.xml' | relative_url }}" rel="alternate" type="application/atom+xml" title="Subscribe to the blog and news feed" data-tip="RSS feed">{% include icon.html name="rss" %}<span class="sr-only">Subscribe to the blog and news feed (RSS)</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="wrap footer-base">
+    <p>© {{ site.time | date: "%Y" }} Haddag Abdelkader</p>
+  </div>
+</footer>

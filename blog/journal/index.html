@@ -1,0 +1,15 @@
+---
+layout: research
+title: Thoughts and journal
+description: "Personal thoughts and journal entries by Haddag Abdelkader. Browse by month or search."
+---
+{%- assign list = site.posts | where: "type", "journal" -%}
+{% if list.size > 0 %}
+{% include blog-bar.html n=list.size noun="entries" placeholder="Search the journal" timeline=true %}
+  <ul class="crows">
+    {% for p in list %}{% include post-row.html p=p %}{% endfor %}
+  </ul>
+{% include blog-end.html timeline=true %}
+{% else %}
+<div class="emptypage emptypage--sub">{% include empty-state.html icon="bulb" title="No entries yet" text="Short thoughts, notes and reflections will be collected here as they are written." href="/blog/" label="Browse the blog" %}</div>
+{% endif %}

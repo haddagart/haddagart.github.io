@@ -1,0 +1,10 @@
+{%- assign e_hidden = include.hidden -%}
+{%- if include.news.size > 0 -%}
+{%- for item in include.news limit: 8 -%}
+<li><a href="{{ item.url | relative_url }}"{% if e_hidden %} tabindex="-1"{% endif %}><time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%-d %b %Y" }}</time><span>{{ item.title }}</span></a></li>
+{%- endfor -%}
+{%- else -%}
+{%- for p in include.pubs limit: 6 -%}
+<li><a href="{{ p.url | relative_url }}"{% if e_hidden %} tabindex="-1"{% endif %}><em>New paper</em><span>{{ p.title }}</span></a></li>
+{%- endfor -%}
+{%- endif -%}

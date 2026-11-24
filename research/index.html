@@ -1,0 +1,101 @@
+---
+layout: research
+rsection: overview
+title: Research
+description: "Research of Haddag Abdelkader at the SIMPA (Signal, Image, Parole) Laboratory, USTOMB: projects, publications, open calls and supervision on spiking neural networks, human action recognition, optical flow, event cameras and breast cytology image analysis."
+---
+{%- assign pubs = site.publications | sort: "date" | reverse -%}
+{%- assign projects = site.research_projects -%}
+{%- assign ongoing = projects | where: "status", "ongoing" -%}
+{%- assign ptypes = site.data.publication_types -%}
+{%- assign opencalls = site.calls | where: "status", "open" -%}
+
+<div class="rintro">
+  <section class="rintro__lead" aria-labelledby="focus">
+    <div class="rintro__text">
+    <h2 id="focus">What I work on</h2>
+    <p>I'm a Ph.D. student in Artificial Intelligence at the <strong>SIMPA (Signal, Image, Parole) Laboratory</strong>, University of Sciences and Technology of Oran - Mohamed Boudiaf (USTOMB). My thesis explores <em>Human Action Recognition in Video Sequences using Bio-inspired Models</em>: how far can brain-inspired computation (spiking neurons, direction-selective motion processing, event-based sensing) go in understanding what happens in a video, at a fraction of the energy of conventional deep learning?</p>
+    </div>
+    <ul class="profiles" aria-label="Academic profiles">
+      {% for s in site.data.social %}{% if s.group == 'research' %}<li><a href="{{ s.url }}" rel="me noopener" target="_blank" title="{{ s.label }}">{% include icon.html name=s.icon %}<span>{{ s.name }}</span></a></li>{% endif %}{% endfor %}
+    </ul>
+  </section>
+
+  <section class="rlatest" aria-labelledby="latest">
+    <div class="rlatest__stage">
+    <h2 id="latest" class="rlatest__head"><span class="rlatest__live" aria-hidden="true"></span>Latest work</h2>
+    <ol class="rnews" data-rnews>
+      {%- for p in pubs limit: 3 -%}
+      {%- assign pt = ptypes | where: "key", p.type | first -%}
+      <li class="rnews__item">
+        <a class="rnews__link" href="{{ p.url | relative_url }}">
+          <span class="rnews__meta">{{ pt.singular | default: p.type }} · {{ p.date | date: "%Y" }}</span>
+          <span class="rnews__title">{{ p.title }}</span>
+          <span class="rnews__venue"><span>{{ p.venue }}</span></span>
+          <span class="rnews__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+          <span class="rnews__bar" aria-hidden="true"><i></i></span>
+        </a>
+      </li>
+      {%- endfor -%}
+    </ol>
+    </div>
+    <div class="rlatest__foot" data-rnews-foot>
+    <p class="rlatest__more"><a class="pub__btn" href="{{ '/research/contributions/' | relative_url }}">See all {{ pubs.size }}{% include icon.html name="arrow-right" %}</a></p>
+    </div>
+  </section>
+</div>
+
+<section aria-labelledby="map">
+  <h2 id="map">Where to start</h2>
+  <div class="bento">
+    <a class="hubcard hubcard--feature lit" href="{{ '/research/contributions/' | relative_url }}" data-reveal>
+      <span class="hubcard__bg" aria-hidden="true">{% include icon.html name="file-text" %}</span>
+      <h3>Contributions</h3>
+      <p>Everything I've published or presented, with a ready-to-copy citation.</p>
+      <ul class="hubcard__types" aria-label="By type">
+        {%- for t in ptypes -%}{%- assign tn = pubs | where: "type", t.key | size -%}{%- if tn > 0 -%}<li><span>{{ t.label }}</span><b>{{ tn }}</b></li>{%- endif -%}{%- endfor -%}
+      </ul>
+      <span class="hubcard__count"><b>{{ pubs.size }}</b> papers, talks and a thesis</span>
+      <span class="hubcard__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+    </a>
+    <a class="hubcard lit" href="{{ '/research/projects/' | relative_url }}" data-reveal>
+      <span class="hubcard__bg" aria-hidden="true">{% include icon.html name="microscope" %}</span>
+      <h3>Projects</h3>
+      <p>The big questions I'm chasing, and how far along each one is.</p>
+      <span class="hubcard__count"><b>{{ ongoing.size }}</b> in progress, {{ projects.size }} in all</span>
+      <span class="hubcard__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+    </a>
+    <a class="hubcard lit" href="{{ '/research/supervision/' | relative_url }}" data-reveal>
+      <span class="hubcard__bg" aria-hidden="true">{% include icon.html name="school" %}</span>
+      <h3>Supervision</h3>
+      <p>Student projects I've guided, and how to ask me to guide yours.</p>
+      <span class="hubcard__count"><b>{{ site.supervision.size }}</b> projects guided</span>
+      <span class="hubcard__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+    </a>
+    <a class="hubcard lit" href="{{ '/research/service/' | relative_url }}" data-reveal>
+      <span class="hubcard__bg" aria-hidden="true">{% include icon.html name="eye" %}</span>
+      <h3>Service</h3>
+      <p>The journals I review for and the committees I help.</p>
+      <span class="hubcard__count"><b>{{ site.data.service.reviewing.size }}</b> journal reviewed for</span>
+      <span class="hubcard__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+    </a>
+    <a class="hubcard lit" href="{{ '/research/honorable-mentions/' | relative_url }}" data-reveal>
+      <span class="hubcard__bg" aria-hidden="true">{% include icon.html name="users" %}</span>
+      <h3>Honorable mentions</h3>
+      <p>The teachers, hosts and colleagues who shaped my work. Thank you.</p>
+      <span class="hubcard__count"><b>{{ site.data.people.size }}</b> people</span>
+      <span class="hubcard__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+    </a>
+    <a class="hubcard hubcard--calls lit" href="{{ '/research/calls/' | relative_url }}" data-reveal>
+      <span class="hubcard__bg" aria-hidden="true">{% include icon.html name="news" %}</span>
+      <div class="hubcard__calls-text">
+        <h3>Calls</h3>
+        <p>Who I'd love to team up with next: students, co-authors, partners.</p>
+      </div>
+      <span class="hubcard__count">{% if opencalls.size > 0 %}<span class="status status--ongoing"><span class="status__dot" aria-hidden="true"></span><span class="status__text">{{ opencalls.size }} open</span></span>{% else %}Nothing open right now{% endif %}</span>
+      <span class="hubcard__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+    </a>
+  </div>
+</section>
+
+{% include research-cta.html %}

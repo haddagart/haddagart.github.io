@@ -1,0 +1,43 @@
+---
+layout: research
+rsection: contributions
+title: Contributions
+description: "Publications of Haddag Abdelkader: spiking neural networks, motion boundary detection, human action recognition, event-based vision and breast cytology segmentation, with abstracts, DOIs and BibTeX."
+---
+{%- assign pubs = site.publications | sort: "date" | reverse -%}
+
+<section aria-labelledby="pubs">
+  <h2 id="pubs" class="sr-only">All contributions</h2>
+  <div class="filters" role="group" aria-label="Filter by type" data-filters>
+    <button type="button" class="filter is-on" data-filter="all" aria-pressed="true">All <span>{{ pubs.size }}</span></button>
+    {% for t in site.data.publication_types %}{% assign n = pubs | where: "type", t.key | size %}{% if n > 0 %}<button type="button" class="filter" data-filter="{{ t.key }}" aria-pressed="false">{% include icon.html name=t.icon %}{{ t.label }} <span>{{ n }}</span></button>{% endif %}{% endfor %}
+  </div>
+
+  {% for t in site.data.publication_types %}
+  {% assign items = pubs | where: "type", t.key %}
+  {% if items.size > 0 %}
+  <div class="pubgroup" data-group="{{ t.key }}">
+    <h3 class="pubgroup__title">{% include icon.html name=t.icon %}{{ t.label }}</h3>
+    <ol class="publist">
+      {% for p in items %}
+      <li class="pub" data-reveal>
+        <article>
+          <p class="pub__when">{{ p.when }}</p>
+          <h4 class="pub__title"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h4>
+          <p class="pub__authors">{% include pub-authors.html authors=p.authors %}</p>
+          <p class="pub__venue">{% include pub-venue.html pub=p %}</p>
+          <p class="pub__actions">
+            <a class="pub__btn" href="{{ p.url | relative_url }}">{% include icon.html name="file-text" %}Details</a>
+            {% if p.doi %}<a class="pub__btn" href="https://doi.org/{{ p.doi }}" rel="noopener" target="_blank">{% include icon.html name="external-link" %}DOI</a>{% endif %}
+            {% if p.link %}<a class="pub__btn" href="{{ p.link }}" rel="noopener" target="_blank">{% include icon.html name="external-link" %}{{ p.linklabel }}</a>{% endif %}
+          </p>
+        </article>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+  {% endif %}
+  {% endfor %}
+</section>
+
+{% include research-cta.html %}

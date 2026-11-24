@@ -1,0 +1,15 @@
+---
+layout: research
+title: Articles
+description: "Articles by Haddag Abdelkader on artificial intelligence, research and teaching. Browse by month or search."
+---
+{%- assign list = site.posts | where_exp: "p", "p.series == nil" | where_exp: "p", "p.type != 'journal'" -%}
+{% if list.size > 0 %}
+{% include blog-bar.html n=list.size noun="articles" placeholder="Search articles" timeline=true %}
+  <ul class="crows">
+    {% for p in list %}{% include post-row.html p=p %}{% endfor %}
+  </ul>
+{% include blog-end.html timeline=true %}
+{% else %}
+<div class="emptypage emptypage--sub">{% include empty-state.html icon="pencil" title="Articles are on the way" text="I am writing about artificial intelligence, research and teaching. The first articles will appear here." href="/research/" label="Explore my research" href2="/news/" label2="Read the news" %}</div>
+{% endif %}

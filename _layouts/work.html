@@ -1,0 +1,42 @@
+---
+layout: default
+---
+{%- assign dd = site.data.disciplines | where: "key", page.discipline | first -%}
+<article class="pubpage projectpage" itemscope itemtype="https://schema.org/SoftwareSourceCode">
+  <header class="page-hero">
+    <div class="wrap">
+      <a class="backlink" href="{{ '/projects/' | append: page.discipline | append: '/' | relative_url }}">{% include icon.html name="arrow-left" %}<span>All {{ dd.title | downcase }} projects</span></a>
+      <p class="eyebrow">{{ dd.title }}{% if page.kind %} · {{ page.kind }}{% endif %}{% if page.year %} · {{ page.year }}{% endif %}</p>
+      <h1 itemprop="name">{{ page.title }}</h1>
+      {% if page.status %}<p class="projectpage__status">{% include status.html status=page.status %}</p>{% endif %}
+      <p class="lead" itemprop="description">{{ page.summary }}</p>
+    </div>
+  </header>
+  <div class="zigzag zigzag--top" aria-hidden="true"></div>
+  <div class="wrap section">
+    <div class="pubpage__grid">
+      <div class="prose">
+        {{ content }}
+        {% if page.topics %}<h2 id="topics">Topics</h2><ul class="chips">{% for t in page.topics %}<li class="chip">{{ t }}</li>{% endfor %}</ul>{% endif %}
+      </div>
+      <aside class="pubpage__side" aria-label="Project details">
+        <div class="workpage__logo"{% if page.accent %} style="--tint: {{ page.accent }}"{% endif %}><span class="work__mark">{% if page.image %}<img src="{{ page.image | relative_url }}" alt="{{ page.title }} logo" width="96" height="96">{% else %}<b aria-hidden="true">{{ page.title | slice: 0, 1 | upcase }}</b>{% endif %}</span></div>
+        {% if page.links %}
+        <h2>Links</h2>
+        <ul class="linklist">
+          {% for l in page.links %}<li><a class="btn {% if l.primary %}btn--primary{% else %}btn--ghost{% endif %} btn--sm" href="{{ l.url }}" rel="noopener" target="_blank">{% include icon.html name=l.icon %}<span>{{ l.label }}</span></a></li>{% endfor %}
+        </ul>
+        {% endif %}
+        <dl class="facts">
+          {% if page.status %}<dt>Status</dt><dd>{% if page.status == 'ongoing' %}Ongoing{% else %}Ended{% endif %}</dd>{% endif %}
+          {% if page.kind %}<dt>Type</dt><dd>{{ page.kind }}</dd>{% endif %}
+          {% if page.version %}<dt>Version</dt><dd>{{ page.version }}</dd>{% endif %}
+          {% if page.license %}<dt>Licence</dt><dd>{{ page.license }}</dd>{% endif %}
+          {% if page.platforms %}<dt>Platforms</dt><dd>{{ page.platforms | join: ', ' }}</dd>{% endif %}
+          {% if page.stack %}<dt>Built with</dt><dd>{{ page.stack | join: ', ' }}</dd>{% endif %}
+          {% if page.period %}<dt>Period</dt><dd>{{ page.period }}</dd>{% endif %}
+        </dl>
+      </aside>
+    </div>
+  </div>
+</article>

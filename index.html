@@ -1,0 +1,110 @@
+---
+layout: default
+body_class: home
+---
+<section class="hero clay-host">
+  <div class="clay-layer" aria-hidden="true">
+    {% include clay.html name="sphere" x="87%" y="24%" s="clamp(2rem, 3vw, 2.8rem)" r="0" d="1.3" cls="clay--md" %}
+    {% include clay.html name="pyramid" x="57%" y="74%" s="clamp(3rem, 4.8vw, 4.2rem)" r="8" d="0.9" cls="clay--lg" %}
+    {% include clay.html name="cube" x="91%" y="74%" s="clamp(1.8rem, 2.8vw, 2.6rem)" r="-10" d="1.5" cls="clay--md" %}
+  </div>
+  <div class="wrap hero__grid">
+    <div class="hero__copy" data-parallax="-0.05" data-mouse="8">
+      <p class="eyebrow" data-reveal>Ph.D. researcher · Educator · AI engineer</p>
+      <h1 data-reveal style="--d:80ms">Haddag Abdelkader</h1>
+      <p class="hero__tagline" data-reveal style="--d:160ms">{{ site.tagline }}.</p>
+      <p class="hero__text" data-reveal style="--d:240ms">I'm a research and problem-solving oriented AI engineer working on deep learning and computer vision. I hold a master's in AI and I'm pursuing a Ph.D. in Artificial Intelligence. I also design courses and build tools, bringing a calm, analog sensibility to digital work.</p>
+      <div class="hero__actions" data-reveal style="--d:320ms">
+        <a class="btn btn--primary btn--pulse" data-magnetic href="{{ '/work-with-me/' | relative_url }}"><span>Work with me</span>{% include icon.html name="arrow-right" %}</a>
+        <a class="btn btn--ghost" href="{{ '/about/' | relative_url }}">{% include icon.html name="id" %}<span>Know me better</span></a>
+      </div>
+    </div>
+    <figure class="portrait" data-reveal style="--d:200ms">
+      <span class="portrait__stars" aria-hidden="true"></span>
+      <span class="portrait__corona" aria-hidden="true"><i></i><i></i></span>
+      <svg class="orbits orbits--back" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><g data-orbit="0"><path d="M -32 0 A 32 11.52 0 0 1 32 0"/></g><g data-orbit="1"><path d="M -39 0 A 39 14.04 0 0 1 39 0"/></g><g data-orbit="2"><path d="M -46 0 A 46 16.56 0 0 1 46 0"/></g></svg>
+      <div class="portrait__frame" data-mouse="-8">
+        <div class="portrait__window">
+          <picture>
+            <source srcset="{{ '/assets/img/haddag-portrait.webp' | relative_url }}" type="image/webp">
+            <img src="{{ '/assets/img/haddag-portrait.jpg' | relative_url }}" width="617" height="860" alt="Portrait of Haddag Abdelkader, smiling, in a dark suit and brown tie" fetchpriority="high">
+          </picture>
+        </div>
+      </div>
+      <svg class="orbits orbits--front" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><g data-orbit="0"><path d="M -32 0 A 32 11.52 0 0 0 32 0"/></g><g data-orbit="1"><path d="M -39 0 A 39 14.04 0 0 0 39 0"/></g><g data-orbit="2"><path d="M -46 0 A 46 16.56 0 0 0 46 0"/></g></svg>
+      <ul class="planets" aria-label="Roles and focus areas"><li class="planet" data-orbit="0" data-phase="0.0"><span class="planet__pill">{% include icon.html name="robot" %}<span>AI engineer</span></span></li><li class="planet" data-orbit="0" data-phase="3.14"><span class="planet__pill">{% include icon.html name="brain" %}<span>Deep learning</span></span></li><li class="planet" data-orbit="1" data-phase="0.0"><span class="planet__pill">{% include icon.html name="microscope" %}<span>Ph.D. researcher</span></span></li><li class="planet" data-orbit="1" data-phase="2.09"><span class="planet__pill">{% include icon.html name="leaf" %}<span>Nature activist</span></span></li><li class="planet" data-orbit="1" data-phase="4.19"><span class="planet__pill">{% include icon.html name="eye" %}<span>Computer vision</span></span></li><li class="planet" data-orbit="2" data-phase="0.6"><span class="planet__pill">{% include icon.html name="school" %}<span>Educator</span></span></li><li class="planet" data-orbit="2" data-phase="2.7"><span class="planet__pill">{% include icon.html name="palette" %}<span>Multi-disciplinary designer</span></span></li><li class="planet" data-orbit="2" data-phase="4.8"><span class="planet__pill">{% include icon.html name="compass" %}<span>AI agents</span></span></li></ul>
+    </figure>
+  </div>
+</section>
+<div class="zigzag zigzag--top" aria-hidden="true"></div>
+
+<section class="section clay-host" aria-labelledby="roles-title">
+  <div class="clay-layer" aria-hidden="true">
+    {% include clay.html name="cube" x="92%" y="4%" s="clamp(2.4rem, 4.2vw, 3.6rem)" r="12" d="1.1" %}
+    {% include clay.html name="sphere" x="2%" y="82%" s="clamp(2rem, 3.2vw, 2.8rem)" r="0" d="1.4" cls="clay--md" %}
+  </div>
+  <div class="wrap">
+    <div class="section-head" data-parallax="0.05" data-reveal>
+      <p class="eyebrow">What I do</p>
+      <h2 id="roles-title">Many roles, one curiosity</h2>
+      <p class="lead">Research, teaching and building feed each other. Pick the thread you came for.</p>
+    </div>
+    <div class="facets">
+      <a class="facet" data-spotlight data-reveal href="{{ '/research/' | relative_url }}">
+        <span class="facet__top">{% include icon.html name="microscope" class="facet__icon" %}<span class="facet__num">01</span></span>
+        <h3>Research</h3>
+        <p>Deep learning and computer vision, pursued through a Ph.D. in Artificial Intelligence.</p>
+        <span class="facet__more">Research &amp; publications {% include icon.html name="arrow-right" %}</span>
+      </a>
+      <a class="facet" data-spotlight data-reveal style="--d:100ms" href="{{ '/teaching/' | relative_url }}">
+        <span class="facet__top">{% include icon.html name="school" class="facet__icon" %}<span class="facet__num">02</span></span>
+        <h3>Teaching &amp; training</h3>
+        <p>University courses and hands-on professional training, built around learning by example.</p>
+        <span class="facet__more">Courses &amp; training {% include icon.html name="arrow-right" %}</span>
+      </a>
+      <a class="facet" data-spotlight data-reveal style="--d:200ms" href="{{ '/projects/' | relative_url }}">
+        <span class="facet__top">{% include icon.html name="code" class="facet__icon" %}<span class="facet__num">03</span></span>
+        <h3>Projects</h3>
+        <p>Tools, apps and open experiments, from research code to software for community work.</p>
+        <span class="facet__more">See the projects {% include icon.html name="arrow-right" %}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{%- assign news_items = site.news | sort: "date" | reverse -%}
+{%- assign recent_pubs = site.publications | sort: "date" | reverse -%}
+<div class="newsbar" data-newsbar>
+  <div class="wrap newsbar__row">
+    <a class="newsbar__label" href="{{ '/news/' | relative_url }}"><span class="newsbar__dot" aria-hidden="true"></span>News</a>
+    <div class="newsbar__view" role="region" aria-label="Latest news">
+      <div class="newsbar__track">
+        <ul class="newsbar__list">{% include newsbar-items.html news=news_items pubs=recent_pubs %}</ul>
+        <ul class="newsbar__list" aria-hidden="true">{% include newsbar-items.html news=news_items pubs=recent_pubs hidden="yes" %}</ul>
+      </div>
+    </div>
+    <button class="iconbtn newsbar__pause" type="button" data-newsbar-pause aria-pressed="false" aria-label="Pause the news ticker" title="Pause the news ticker"><svg class="newsbar__i1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/></svg><svg class="newsbar__i2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+  </div>
+</div>
+
+<section class="band section clay-host" aria-labelledby="work-title">
+  <div class="clay-layer" aria-hidden="true">
+    {% include clay.html name="pyramid" x="92%" y="68%" s="clamp(3rem, 5.4vw, 4.8rem)" r="-6" d="0.9" cls="clay--md" %}
+    {% include clay.html name="cube" x="52%" y="6%" s="clamp(2rem, 3vw, 2.6rem)" r="10" d="1.3" cls="clay--md" %}
+    {% include clay.html name="sphere" x="97%" y="22%" s="clamp(1.8rem, 2.6vw, 2.3rem)" r="0" d="1.5" cls="clay--md" %}
+  </div>
+  <div class="wrap band__grid">
+    {% include cosmos.html %}
+    <div>
+      <p class="eyebrow" data-reveal>Work with me</p>
+      <h2 id="work-title" data-reveal style="--d:80ms">Let's build something useful together.</h2>
+      <p class="lead" data-reveal style="--d:140ms">Whether you're a lab, a company or a student with a hard problem, there's likely a good way to work together.</p>
+      <ul class="offers">
+        {% for o in site.data.offers %}
+        <li data-reveal style="--d:{{ forloop.index0 | times: 70 | plus: 200 }}ms">{% include icon.html name=o.icon class="offers__icon" %}<span><strong>{{ o.title }}</strong> <span>{{ o.summary }}</span></span></li>
+        {% endfor %}
+      </ul>
+      <a class="btn btn--primary btn--pulse" data-magnetic data-reveal href="{{ '/work-with-me/' | relative_url }}">{% include icon.html name="mail" %}<span>Start a conversation</span>{% include icon.html name="arrow-right" %}</a>
+    </div>
+  </div>
+</section>

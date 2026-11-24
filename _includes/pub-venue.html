@@ -1,0 +1,2 @@
+{%- assign p = include.pub -%}
+<em>{{ p.venue }}</em>{% if p.series %}, {{ p.series }}{% endif %}{% if p.volume %}, vol. {{ p.volume }}{% endif %}{% if p.pages %}, {% if p.pagelabel %}{{ p.pagelabel }}{% else %}pp. {{ p.pages }}{% endif %}{% endif %}{% if p.type == 'journal' or p.type == 'conference' or p.type == 'thesis' %}{% if p.publisher and p.type != 'journal' %}, {{ p.publisher }}{% endif %}{% endif %}, {{ p.when }}

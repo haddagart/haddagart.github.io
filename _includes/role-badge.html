@@ -1,0 +1,2 @@
+{%- assign label = "Supervised" -%}{%- if include.role == "co-supervised" -%}{%- assign label = "Co-supervised" -%}{%- endif -%}
+<span class="rolebadge rolebadge--{{ include.role }}">{% include icon.html name="school" %}{{ label }}</span>

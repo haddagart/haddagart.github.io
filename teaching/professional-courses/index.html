@@ -1,0 +1,7 @@
+---
+layout: browse
+title: Professional courses
+description: "Catalog of professional courses by Haddag Abdelkader: Python, JavaScript, Java, Excel and mathematics. Search, filter by in-person, online or hybrid, and request a course for your team."
+---
+{%- assign list = site.courses | where: "kind", "professional" | sort: "title" -%}
+{% include works-browser.html kind="courses" entries=list scope="all" custom="true" facets="modes|How it runs;format|Type;levels|Level;topics|Topic" %}

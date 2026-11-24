@@ -1,0 +1,2 @@
+{%- comment -%} {% include status.html status="ongoing" %} : ongoing (green ripple) or ended (red ripple) {%- endcomment -%}
+<span class="status status--{{ include.status }}"><span class="status__dot" aria-hidden="true"></span><span class="status__text">{% if include.status == 'ongoing' %}Ongoing{% else %}Ended{% endif %}</span></span>

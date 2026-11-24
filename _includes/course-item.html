@@ -1,0 +1,11 @@
+{%- assign c = include.course -%}
+{%- assign e_lv = c.levels | join: "|" -%}
+<li class="work" data-work data-title="{{ c.title | downcase | escape }}" data-modes="{{ c.modes | join: '|' }}" data-format="{{ c.format | escape }}" data-levels="{{ e_lv | escape }}" data-topics="{{ c.topics | join: '|' | escape }}">
+  <a class="work__media" href="{{ c.url | relative_url }}" tabindex="-1" aria-hidden="true"><span class="work__mark"><b>{{ c.title | slice: 0, 1 | upcase }}</b></span></a>
+  <div class="work__body">
+    <h3 class="work__title"><a href="{{ c.url | relative_url }}">{{ c.title }}</a></h3>
+    <p class="work__summary">{{ c.summary }}</p>
+    <p class="work__meta">{% include mode-badges.html modes=c.modes %}<span>{{ c.format }}{% if c.levels.size > 0 %} · {{ c.levels | join: ", " }}{% endif %}</span></p>
+  </div>
+  <span class="work__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+</li>

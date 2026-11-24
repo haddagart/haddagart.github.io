@@ -1,0 +1,8 @@
+# Series and special issues. Each needs a page at blog/series/<slug>/index.html (layout: series, series_id: <slug>).
+# Posts join a series with front matter `series: <slug>` and `series_part: <number>`.
+# Unpublished (restore when the series goes live):
+# - slug: spiking-neural-networks
+#   title: Spiking neural networks
+#   kind: Series
+#   description: "A visual, by-example introduction to spiking neural networks, from a single neuron to training and hardware."
+[]

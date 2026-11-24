@@ -1,0 +1,14 @@
+# Profiles shown in the footer and in the Person structured data (sameAs, rel="me").
+# Grouped by purpose so people and crawlers see what each profile is for:
+#   research = scholarly identity, code = work and open source, media = social and video.
+# `icon` is a Tabler icon name from _includes/icons/. `label` is the descriptive text for screen readers and crawlers.
+- { group: research, name: ORCID, label: "ORCID researcher identifier", url: "https://orcid.org/0000-0002-6481-0999", icon: id }
+- { group: research, name: Google Scholar, label: "Google Scholar citations profile", url: "https://scholar.google.com/citations?user=rSpkNpYAAAAJ&hl=en", icon: brand-google-scholar }
+- { group: research, name: ResearchGate, label: "ResearchGate research profile", url: "https://www.researchgate.net/profile/Abdelkader-Haddag", icon: users }
+- { group: research, name: alphaXiv, label: "alphaXiv paper discussions", url: "https://www.alphaxiv.org/@abdelkader-haddag", icon: math-function }
+- { group: code, name: GitHub, label: "GitHub open-source projects", url: "https://github.com/haddagart", icon: brand-github }
+- { group: code, name: LinkedIn, label: "LinkedIn professional profile", url: "https://www.linkedin.com/in/haddagart/", icon: brand-linkedin }
+- { group: media, name: YouTube, label: "YouTube channel", url: "https://www.youtube.com/@haddagart", icon: brand-youtube }
+- { group: media, name: X (Twitter), label: "X (Twitter) account", url: "https://twitter.com/haddagart", icon: brand-x }
+- { group: media, name: Instagram, label: "Instagram profile", url: "https://instagram.com/haddagart", icon: brand-instagram }
+- { group: media, name: Facebook, label: "Facebook page", url: "https://facebook.com/haddagart", icon: brand-facebook }

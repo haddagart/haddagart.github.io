@@ -1,0 +1,116 @@
+# Site settings — GitHub Pages (Jekyll) builds this automatically.
+title: Haddag Abdelkader
+tagline: Analogous aspiring polymath in a distracting digital world
+description: AI engineer and Ph.D. researcher in deep learning and computer vision. Research, teaching, projects, and collaboration.
+url: "https://haddagart.github.io"   # change to your custom domain if you add one
+baseurl: ""
+lang: en
+timezone: Africa/Algiers
+author:
+  name: Haddag Abdelkader
+email: ""   # intentionally empty: the university email is obfuscated, see affiliation.email_user
+logo: /assets/img/og-image.jpg
+image: /assets/img/og-image.jpg
+social:
+  name: Haddag Abdelkader
+  links:
+    - https://orcid.org/0000-0002-6481-0999
+    - https://www.researchgate.net/profile/Abdelkader-Haddag
+    - https://www.alphaxiv.org/@abdelkader-haddag
+    - https://github.com/haddagart
+    - https://www.linkedin.com/in/haddagart/
+    - https://www.youtube.com/@haddagart
+    - https://twitter.com/haddagart
+    - https://facebook.com/haddagart
+# add ORCID, Google Scholar, LinkedIn, DBLP… here and in _data/social.yml
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+permalink: /blog/:title/
+collections:
+  news:
+    output: true
+    permalink: /news/:title/
+  publications:
+    output: true
+    permalink: /research/contributions/:name/
+  research_projects:
+    output: true
+    permalink: /research/projects/:name/
+  calls:
+    output: true
+    permalink: /research/calls/:name/
+  supervision:
+    output: true
+    permalink: /research/supervision/:name/
+  courses:
+    output: true
+    permalink: /teaching/courses/:name/
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope: { path: "", type: "projects" }
+    values: { layout: work }
+  - scope: { path: "", type: "posts" }
+    values: { layout: post }
+  - scope: { path: "", type: "news" }
+    values: { layout: post }
+  - scope: { path: "", type: "publications" }
+    values: { layout: publication }
+  - scope: { path: "", type: "research_projects" }
+    values: { layout: project }
+  - scope: { path: "", type: "calls" }
+    values: { layout: call }
+  - scope: { path: "", type: "supervision" }
+    values: { layout: supervision }
+  - scope: { path: "", type: "courses" }
+    values: { layout: course }
+
+exclude:
+  - README.md
+  - docs/
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - node_modules/
+  - vendor/
+  # Spiking neural networks series: unpublished for now (same list as .gitignore).
+  - _posts/2026-11-24-spiking-neurons.md
+  - _posts/2026-11-24-why-training-spiking-networks-is-harder.md
+  - _posts/2026-11-24-surrogate-gradients-in-practice.md
+  - _posts/2026-11-24-putting-it-together-spiking-digits.md
+  - _posts/2026-11-24-giving-spiking-neurons-a-memory.md
+  - blog/series/spiking-neural-networks/
+  - assets/js/digit-demo.js
+  - assets/js/memory-demo.js
+  - assets/data/snn-digits.json
+  - assets/code/spiking_digits_numpy.py
+  - assets/code/delayed_cue_numpy.py
+
+# Shown in the footer and in the Person structured data.
+affiliation:
+  name: "University of Sciences and Technology of Oran - Mohamed Boudiaf (USTOMB)"
+  lab: "SIMPA (Signal, Image, Parole) Laboratory"
+  email_user: "abdelkader.haddag"
+  email_domain: "univ-usto.dz"
+  department: "Department of Computer Science"
+  faculty: "Faculty of Mathematics and Computer Science"
+  street: "El Mnaouar, BP 1505"
+  city: "Bir El Djir"
+  postal: "31000"
+  region: "Oran"
+  country: "Algeria"
+  country_code: "DZ"
+phone: ""   # optional; leave empty to keep it off the public site
+
+# Markdown: GitHub-style fences, Rouge syntax highlighting, and $$ ... $$ math (rendered by KaTeX when a page sets `math: true`)
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  math_engine: mathjax

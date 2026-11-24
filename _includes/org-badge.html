@@ -1,0 +1,2 @@
+{%- assign o = site.data.orgs | where: "key", include.org | first -%}
+<span class="org org--{{ include.sz }}"><span class="org__logo" aria-hidden="true"><span class="org__mark">{{ o.mark }}</span>{% if o.logo %}<img src="{{ o.logo | relative_url }}" alt="" width="96" height="96" loading="lazy" decoding="async" onerror="this.remove()">{% endif %}</span>{% if include.label != "no" %}<span class="org__name">{% if include.short == "yes" %}{{ o.short }}{% else %}{{ o.name }}{% endif %}</span>{% endif %}</span>

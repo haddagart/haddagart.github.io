@@ -1,2 +1,14 @@
 # haddagart.github.io
-Personal website: research, teaching, projects, news, and blog.
+
+Personal website of Haddag Abdelkader: AI research, teaching, projects, and collaboration.
+
+Built with Jekyll and published with GitHub Pages. See [docs/SITEMAP.md](docs/SITEMAP.md) for the site structure and design system.
+
+## Local preview
+
+```
+bundle install
+bundle exec jekyll serve
+```
+
+Then open http://localhost:4000.

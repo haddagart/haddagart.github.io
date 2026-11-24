@@ -1,0 +1,21 @@
+---
+layout: research
+rsection: service
+title: Service
+description: "Peer review service of Haddag Abdelkader: reviewer for the journal Knowledge-Based Systems (Elsevier) since 2025."
+---
+{%- assign groups = "reviewing|boards|committees" | split: "|" -%}
+<ul class="ledger">
+  {% for g in groups %}{% for s in site.data.service[g] %}
+  <li class="ledger__row ledger__row--org" data-reveal>
+    {% include org-badge.html org=s.org sz="lg" label="no" %}
+    <div class="ledger__body">
+      <h2 class="ledger__name">{{ s.name }}</h2>
+      <p class="ledger__aff">{{ s.publisher }}</p>
+      <ul class="roles">
+        {% for r in s.roles %}<li><span class="roles__name">{{ r.role }}</span><span class="roles__dates">{{ r.from }} – {{ r.to }}</span></li>{% endfor %}
+      </ul>
+    </div>
+  </li>
+  {% endfor %}{% endfor %}
+</ul>

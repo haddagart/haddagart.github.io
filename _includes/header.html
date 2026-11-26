@@ -14,6 +14,10 @@
       </button>
     </div>
     <nav id="site-nav" class="site-nav" aria-label="Primary">
+      <div class="drawer__top">
+        <span class="drawer__title">Menu</span>
+        <button class="drawer__close" type="button" aria-label="Close menu">{% include icon.html name="x" %}</button>
+      </div>
       <ul>
         {% for item in site.data.nav.main %}
         <li><a href="{{ item.url | relative_url }}"{% assign cur = page.url | slice: 0, item.url.size %}{% if cur == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
@@ -21,6 +25,7 @@
       </ul>
       <a class="btn btn--primary btn--sm" href="{{ site.data.nav.cta.url | relative_url }}">{{ site.data.nav.cta.title }}</a>
     </nav>
+    <div class="nav-scrim" data-nav-scrim aria-hidden="true"></div>
   </div>
   {%- if page.url contains '/research/' -%}
   {%- assign rs = "overview" -%}
@@ -44,6 +49,7 @@
   {%- assign pu = page.url | slice: 0, 10 -%}
   {%- if pu == '/projects/' -%}
   {%- assign ps = "all" -%}
+  {%- if page.url == '/projects/' %}{% assign ps = "overview" %}{% endif -%}
   {%- for d in site.data.disciplines %}{% if page.url contains d.key %}{% assign ps = d.key %}{% endif %}{% endfor -%}
   {%- if page.discipline %}{% assign ps = page.discipline %}{% endif -%}
   <div class="deck">{% include projects-nav.html current=ps %}</div>

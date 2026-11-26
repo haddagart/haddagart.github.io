@@ -1,3 +1,10 @@
+/* Motion preference: the system setting, unless the visitor chose full or calm motion (footer switch). */
+window.siteReducedMotion = function () {
+  var m = document.documentElement.getAttribute('data-motion');
+  if (m === 'full') return false;
+  if (m === 'calm') return true;
+  return !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+};
 // Theme toggle, mobile menu, and the drifting pattern. The site works without JS.
 (function () {
   var root = document.documentElement;
@@ -28,17 +35,41 @@
     if (mq.addEventListener) { mq.addEventListener('change', onChange); }
   }
 
-  /* ---------- Mobile menu ---------- */
+  /* ---------- Mobile menu: side drawer ---------- */
   var btn = document.querySelector('.nav-toggle');
   var nav = document.getElementById('site-nav');
   if (btn && nav) {
-    var set = function (open) {
+    var scrim = document.querySelector('[data-nav-scrim]');
+    var closeBtn = nav.querySelector('.drawer__close');
+    var wide = window.matchMedia('(min-width: 64rem)');
+    var isOpen = false;
+    var focusables = function () { return Array.prototype.slice.call(nav.querySelectorAll('a[href], button:not([disabled])')); };
+    var set = function (open, restore) {
+      if (open === isOpen) return;
+      isOpen = open;
       btn.setAttribute('aria-expanded', String(open));
       nav.classList.toggle('is-open', open);
+      document.documentElement.classList.toggle('nav-open', open);
+      if (open) {
+        var f = focusables(); if (f.length) setTimeout(function () { (closeBtn || f[0]).focus(); }, 60);
+      } else if (restore !== false) { btn.focus(); }
     };
-    btn.addEventListener('click', function () { set(btn.getAttribute('aria-expanded') !== 'true'); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
-    nav.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+    btn.addEventListener('click', function () { set(!isOpen); });
+    if (closeBtn) closeBtn.addEventListener('click', function () { set(false); });
+    if (scrim) scrim.addEventListener('click', function () { set(false); });
+    document.addEventListener('keydown', function (e) {
+      if (!isOpen) return;
+      if (e.key === 'Escape') { set(false); return; }
+      if (e.key === 'Tab') {                         /* keep focus inside the open drawer */
+        var f = focusables(); if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+    nav.addEventListener('click', function (e) { if (e.target.closest('a')) set(false, false); });
+    var onWide = function () { if (wide.matches) set(false, false); };
+    if (wide.addEventListener) wide.addEventListener('change', onWide);
   }
 
   /* ---------- Pattern: rows that slide left and right with the mouse ---------- */
@@ -73,7 +104,7 @@
   buildAll();
   window.addEventListener('resize', function () { clearTimeout(timer); timer = setTimeout(buildAll, 200); });
 
-  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = window.siteReducedMotion();
 
   // Ease toward the pointer's horizontal position (-1 left edge … +1 right edge).
   var cur = 0, target = 0, raf = null;
@@ -89,7 +120,7 @@
   }, { passive: true });
 
   /* ---------- Micro-interactions ---------- */
-  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = window.siteReducedMotion();
   var fine = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   // Scroll reveal
@@ -538,12 +569,14 @@
   var planets = Array.prototype.slice.call(fig.querySelectorAll('.planet'));
   var groups = Array.prototype.slice.call(fig.querySelectorAll('.orbits g'));
   if (!planets.length) return;
-  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var K = 0.36;
+  var reduce = window.siteReducedMotion();
+  /* Each orbit lies in its own 3D plane: `tilt` turns the line of nodes on screen, `k` is cos(inclination)
+     (small = seen almost edge-on, large = seen more face-on). `pre`/`pp` precess the plane slowly and `kb`/`kp` let the
+     inclination breathe, so the rings gently turn in space instead of sitting flat. */
   var ORB = [
-    { rx: 32, e: 0.10, tilt: -14, period: 20, dir: 1 },
-    { rx: 39, e: 0.17, tilt: 9, period: 32, dir: -1 },
-    { rx: 46, e: 0.12, tilt: -5, period: 47, dir: 1 }
+    { rx: 31, e: 0.10, tilt: -16, k: 0.30, period: 20, dir: 1,  pre: 5, pp: 38, kb: 0.05, kp: 29 },
+    { rx: 38, e: 0.16, tilt: 64,  k: 0.52, period: 32, dir: -1, pre: 6, pp: 51, kb: 0.07, kp: 43 },
+    { rx: 45, e: 0.12, tilt: -62, k: 0.40, period: 47, dir: 1,  pre: 5, pp: 67, kb: 0.06, kp: 59 }
   ];
   fig.classList.add('is-orbit');
   var data = planets.map(function (el) {
@@ -556,20 +589,27 @@
   function outCubic(t) { t = Math.min(1, Math.max(0, t)); return 1 - Math.pow(1 - t, 3); }
   function render(now) {
     W = fig.clientWidth;
-    var age = (now - born) / 1000, sc = W < 480 ? 0.54 : 0.92;
-    var tiltOf = ORB.map(function (o, i) { return o.tilt + p.x * (3 + i * 2.2) - p.y * 1.5; });
+    var age = (now - born) / 1000, sc = W < 480 ? 0.88 : 0.92;
+    var tiltOf = ORB.map(function (o, i) { return o.tilt + o.pre * Math.sin(clock * 6.2832 / o.pp + i) + p.x * (3 + i * 2.2) - p.y * 1.5; });
+    var kOf = ORB.map(function (o, i) { return Math.min(0.9, Math.max(0.12, o.k + o.kb * Math.sin(clock * 6.2832 / o.kp + i * 2) + p.y * 0.04)); });
     var grow = ORB.map(function (o, i) { return outCubic((age - 0.1 - i * 0.25) / 1.6); });
     groups.forEach(function (g) {
       var i = parseInt(g.getAttribute('data-orbit'), 10) || 0, o = ORB[i], s = sc * (0.55 + 0.45 * grow[i]);
       g.setAttribute('transform', 'rotate(' + tiltOf[i].toFixed(2) + ') translate(' + (-o.e * o.rx * s).toFixed(2) + ' 0) scale(' + s.toFixed(3) + ')');
       g.style.opacity = grow[i].toFixed(2);
+      var ry = (o.rx * kOf[i]).toFixed(2), paths = g.querySelectorAll('path');
+      for (var q = 0; q < paths.length; q++) {
+        var front = !!(g.parentNode && g.parentNode.classList.contains('orbits--front'));
+        paths[q].setAttribute('d', 'M ' + (-o.rx) + ' 0 A ' + o.rx + ' ' + ry + ' 0 0 ' + (front ? 0 : 1) + ' ' + o.rx + ' 0');
+      }
     });
     data.forEach(function (d, n) {
       var o = ORB[d.o], M = d.ph + o.dir * clock * (Math.PI * 2 / o.period), E = kepler(M, o.e);
       var g = sc * (0.55 + 0.45 * grow[d.o]);
-      var lx = o.rx * (Math.cos(E) - o.e) * g, ly = o.rx * K * Math.sin(E) * g, t = tiltOf[d.o] * Math.PI / 180;
+      var k = kOf[d.o], lx = o.rx * (Math.cos(E) - o.e) * g, ly = o.rx * k * Math.sin(E) * g, t = tiltOf[d.o] * Math.PI / 180;
       var x = lx * Math.cos(t) - ly * Math.sin(t), y = lx * Math.sin(t) + ly * Math.cos(t);
-      var z = Math.sin(E), depth = z * 0.5 + 0.5, el = d.el;
+      var z = Math.sin(E), zq = z * (0.5 + 0.5 * Math.sqrt(1 - k * k)), depth = zq * 0.5 + 0.5, el = d.el;
+      var persp = 1 + 0.07 * zq; x *= persp; y *= persp;
       var b = outCubic((age - 0.4 - n * 0.14) / 1.3);
       var s = (0.8 + 0.3 * depth) * (0.6 + 0.4 * b);
       var px = (50 + x) / 100 * W, py = (50 + y) / 100 * W;
@@ -652,7 +692,7 @@
 /* Home: tilt the 3D space with the cursor (or finger) and with scroll, so the relics shift against the avatar by depth */
 (function () {
   var box = document.querySelector('[data-cosmos]'), sp = box && box.querySelector('[data-space]'); if (!sp) { return; }
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+  if (window.siteReducedMotion()) { return; }
   var tx = 0, ty = 0, cx = 0, cy = 0, run = false;
   function frame() {
     cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
@@ -892,15 +932,15 @@
     var hd = document.createElement('button'); hd.type = 'button'; hd.className = 'wfacet__head';
     hd.innerHTML = '<span class="wfacet__name"></span><i class="wfacet__n" hidden></i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
     hd.querySelector('.wfacet__name').textContent = f[1];
-    var body = document.createElement('div'); body.className = 'wfacet__body'; body.id = 'wf-' + NS + '-' + k; hd.setAttribute('aria-controls', body.id);
-    var open = !!OPEN[NS + ':' + k]; hd.setAttribute('aria-expanded', open); body.hidden = !open; fs.classList.toggle('is-open', open);
-    hd.addEventListener('click', function () { var o = body.hidden; body.hidden = !o; hd.setAttribute('aria-expanded', o); fs.classList.toggle('is-open', o); OPEN[NS + ':' + k] = o; try { localStorage.setItem('worksFacets', JSON.stringify(OPEN)); } catch (e) {} });
+    var body = document.createElement('div'); body.className = 'wfacet__body'; body.id = 'wf-' + NS + '-' + k; var inner = document.createElement('div'); inner.className = 'wfacet__inner'; body.appendChild(inner); hd.setAttribute('aria-controls', body.id);
+    var open = !!OPEN[NS + ':' + k]; hd.setAttribute('aria-expanded', open); fs.classList.toggle('is-open', open);
+    hd.addEventListener('click', function () { var o = !fs.classList.contains('is-open'); hd.setAttribute('aria-expanded', o); fs.classList.toggle('is-open', o); OPEN[NS + ':' + k] = o; try { localStorage.setItem('worksFacets', JSON.stringify(OPEN)); } catch (e) {} });
     fs.appendChild(hd); fs.appendChild(body);
     var g = { key: k, boxes: [], badge: hd.querySelector('.wfacet__n') };
     keys.forEach(function (lk) {
       var lab = document.createElement('label'), cb = document.createElement('input'), sp = document.createElement('span'), c = document.createElement('i');
       cb.type = 'checkbox'; cb.value = lk; sp.textContent = map[lk].label;
-      lab.appendChild(cb); lab.appendChild(sp); lab.appendChild(c); body.appendChild(lab);
+      lab.appendChild(cb); lab.appendChild(sp); lab.appendChild(c); inner.appendChild(lab);
       cb.addEventListener('change', run); g.boxes.push({ cb: cb, c: c, lab: lab });
     });
     facWrap.appendChild(fs); groups.push(g);
@@ -925,6 +965,7 @@
     n.textContent = shown; empty.hidden = shown > 0;
     badge.textContent = active; badge.hidden = !active;
     clearBtn.hidden = !active;
+    [].forEach.call(root.querySelectorAll('[data-fshown]'), function (e) { e.textContent = shown; });
   }
   function sortItems() {
     var m = sortSel.value;
@@ -944,7 +985,30 @@
   [].forEach.call(root.querySelectorAll('[data-view-btn]'), function (b) { b.addEventListener('click', function () { setView(b.dataset.viewBtn); }); });
   var saved = null; try { saved = localStorage.getItem('worksView'); } catch (e) {}
   if (saved === 'gallery' || saved === 'list') setView(saved);
-  fbtn.addEventListener('click', function () { var o = side.classList.toggle('is-open'); fbtn.setAttribute('aria-expanded', o); });
+  /* Filters: a side panel on wide screens; on small screens a sheet that slides up over a dimmed page */
+  var scrim = document.createElement('div'); scrim.className = 'wscrim'; scrim.setAttribute('aria-hidden', 'true'); root.appendChild(scrim);
+  var wideMq = window.matchMedia('(min-width: 56rem)');
+  function sheet(o, restore) {
+    if (o === side.classList.contains('is-open')) return;
+    side.classList.toggle('is-open', o); fbtn.setAttribute('aria-expanded', o);
+    document.documentElement.classList.toggle('sheet-open', o && !wideMq.matches);
+    if (o) { var d = side.querySelector('[data-fdone]'); if (d && !wideMq.matches) setTimeout(function () { d.focus(); }, 80); }
+    else if (restore) fbtn.focus();
+  }
+  fbtn.addEventListener('click', function () { sheet(!side.classList.contains('is-open'), true); });
+  scrim.addEventListener('click', function () { sheet(false, true); });
+  [].forEach.call(root.querySelectorAll('[data-fdone]'), function (b) { b.addEventListener('click', function () { sheet(false, true); }); });
+  document.addEventListener('keydown', function (e) {
+    if (!side.classList.contains('is-open') || wideMq.matches) return;
+    if (e.key === 'Escape') { sheet(false, true); return; }
+    if (e.key === 'Tab') {
+      var f = [].slice.call(side.querySelectorAll('button, input, a[href]')).filter(function (x) { return x.offsetParent !== null || x === document.activeElement; });
+      if (!f.length) return; var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  if (wideMq.addEventListener) wideMq.addEventListener('change', function () { if (wideMq.matches) sheet(false, false); });
   clearBtn.addEventListener('click', function () { groups.forEach(function (g) { g.boxes.forEach(function (b) { b.cb.checked = false; }); }); q.value = ''; run(); });
   q.addEventListener('input', run); sortSel.addEventListener('change', sortItems);
   sortItems(); run();
@@ -955,7 +1019,7 @@
 (function () {
   var list = document.querySelector('[data-rnews]'); if (!list) return;
   var items = [].slice.call(list.querySelectorAll('.rnews__item')); if (items.length < 2) return;
-  var calm = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var calm = window.siteReducedMotion();
   var nav = document.createElement('div'); nav.className = 'rnews__nav'; nav.setAttribute('role', 'group'); nav.setAttribute('aria-label', 'Choose a work');
   var segs = items.map(function (it, k) {
     var b = document.createElement('button'); b.type = 'button'; b.className = 'rnews__seg'; b.setAttribute('aria-label', 'Show work ' + (k + 1) + ' of ' + items.length); b.innerHTML = '<i></i>';
@@ -963,7 +1027,7 @@
   });
   var count = document.createElement('span'); count.className = 'rnews__count'; count.setAttribute('aria-hidden', 'true'); nav.appendChild(count);
   var foot = document.querySelector('[data-rnews-foot]'); if (foot) foot.insertBefore(nav, foot.firstChild); else list.parentNode.insertBefore(nav, list.nextSibling);
-  var cur = -1, wrap = list.closest('.rlatest') || list.parentNode, timer = null, held = false;
+  var cur = -1, wrap = list.closest('.rlatest, .platest') || list.parentNode, timer = null, held = false;
   function show(i) {
     if (i === cur) return;
     var prev = items[cur];
@@ -976,7 +1040,7 @@
   list.classList.add('is-live'); wrap.classList.add('is-live'); show(0);
   segs.forEach(function (sg, k) { sg.firstChild.addEventListener('animationend', function () { show((k + 1) % items.length); }); });
   function pause(on) { held = on; wrap.classList.toggle('is-paused', on); }
-  wrap.addEventListener('mouseenter', function () { pause(true); }); wrap.addEventListener('mouseleave', function () { pause(false); });
+  [list, nav].forEach(function (el) { el.addEventListener('mouseenter', function () { pause(true); }); el.addEventListener('mouseleave', function () { pause(false); }); });
   wrap.addEventListener('focusin', function () { pause(true); }); wrap.addEventListener('focusout', function (e) { if (!wrap.contains(e.relatedTarget)) pause(false); });
   document.addEventListener('visibilitychange', function () { pause(document.hidden); });
 })();
@@ -992,4 +1056,34 @@
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     var t = on ? 'Resume the news ticker' : 'Pause the news ticker'; btn.title = t; btn.setAttribute('aria-label', t);
   });
+})();
+
+/* Filter pills: keep the chosen pill in view inside its scrolling row */
+(function () {
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('.filters .filter');
+    if (!b) return;
+    var calm = window.siteReducedMotion();
+    if (b.scrollIntoView) b.scrollIntoView({ inline: 'center', block: 'nearest', behavior: calm ? 'auto' : 'smooth' });
+  });
+})();
+
+
+/* Footer switch: choose full or calm motion (remembered in this browser) */
+(function () {
+  var btn = document.querySelector('[data-motion-toggle]'); if (!btn) return;
+  var label = btn.querySelector('[data-motion-label]');
+  function paint() {
+    var calm = window.siteReducedMotion();
+    btn.setAttribute('aria-pressed', calm ? 'false' : 'true');
+    if (label) label.textContent = calm ? 'Motion: calm' : 'Motion: full';
+  }
+  btn.addEventListener('click', function () {
+    var next = window.siteReducedMotion() ? 'full' : 'calm';
+    document.documentElement.setAttribute('data-motion', next);
+    try { localStorage.setItem('motion', next); } catch (e) {}
+    paint();
+    setTimeout(function () { location.reload(); }, 150);     /* scripts read the preference once; a reload applies it everywhere */
+  });
+  paint();
 })();

@@ -16,7 +16,7 @@ layout: default
 {%- else -%}
 <div class="wrap section emptypage">
   <h1 class="sr-only">{{ page.title }}</h1>
-  {% if d %}{% include empty-state.html icon=d.icon title=d.empty_title text=d.empty_text href="/projects/" label="All projects" href2="/work-with-me/" label2="Work with me" %}{% else %}{% include empty-state.html icon="code" title="Projects are on the way" text="Software, design and other work will be showcased here, each with the problem, the approach and the result." href="/research/projects/" label="See research projects" href2="/work-with-me/" label2="Work with me" %}{% endif %}
+  {% if d %}{% include empty-state.html icon=d.icon title=d.empty_title text=d.empty_text href="/projects/all/" label="All projects" href2="/work-with-me/" label2="Work with me" %}{% else %}{% include empty-state.html icon="code" title="Projects are on the way" text="Software, design and other work will be showcased here, each with the problem, the approach and the result." href="/research/projects/" label="See research projects" href2="/work-with-me/" label2="Work with me" %}{% endif %}
 </div>
 <div class="wrap">{% include freelance-cta.html %}</div>
 {%- endif -%}

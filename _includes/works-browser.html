@@ -19,15 +19,15 @@
         <button type="button" data-view-btn="list" aria-pressed="true" aria-label="List view" title="List"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></button>
         <button type="button" data-view-btn="gallery" aria-pressed="false" aria-label="Gallery view" title="Gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2"/></svg></button>
       </div>
-      <button class="catalog__filterbtn wfilterbtn" type="button" aria-expanded="false" data-fbtn>
+      <button class="catalog__filterbtn wfilterbtn" type="button" aria-expanded="false" aria-label="Filters" title="Filters" data-fbtn>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h3M11 12h9M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
-        <span>Filters</span><i class="catalog__badge" data-fcount hidden>0</i>
+        <span class="sr-only">Filters</span><i class="catalog__badge" data-fcount hidden>0</i>
       </button>
     </div>
   </div>
   <div class="wlayout">
     <aside class="wside" data-side aria-label="Filters">
-      <div class="wside__head"><h2>Filters</h2><button type="button" class="wside__clear" data-clear>Clear all</button></div>
+      <div class="wside__head"><h2>Filters</h2><button type="button" class="wside__clear" data-clear>Clear all</button><button type="button" class="wside__done" data-fdone aria-label="Close filters">{% include icon.html name="x" %}</button></div>
       <div data-facets></div>
       {%- if e_custom %}
       <div class="wcta">
@@ -36,6 +36,7 @@
         <button type="button" class="btn btn--primary btn--sm" data-open-modal="custom-modal"><span>Request a course</span>{% include icon.html name="arrow-right" %}</button>
       </div>
       {%- endif %}
+      <div class="wside__foot"><button type="button" class="btn btn--primary" data-fdone>Show <span data-fshown>{{ items.size }}</span> {{ nouns }}</button></div>
     </aside>
     <div class="wmain">
       <ul class="wlist" data-list>

@@ -1,17 +1,21 @@
 # Sub-sections of the Projects page. To add a discipline, add an entry here and a page at projects/<key>/index.md
 # (layout: projects, discipline: <key>). A project joins one with `discipline: <key>` in its front matter.
+# `blurb` is the line shown on the Projects overview.
 - key: software
   title: Software
   icon: code
+  blurb: Tools, frameworks and apps, from research code to software for community work.
   empty_title: Software projects are on the way
   empty_text: Tools, apps and open experiments will be showcased here.
 - key: design
   title: Design
   icon: palette
+  blurb: Brand, interface and visual design.
   empty_title: Design work is on the way
   empty_text: Brand, interface and visual design projects will be showcased here.
-- key: more
-  title: More
+- key: curiosities
+  title: Curiosities
   icon: bulb
-  empty_title: More is on the way
-  empty_text: Projects that do not fit a single discipline will appear here.
+  blurb: Experiments and side quests that do not belong to a single field.
+  empty_title: Curiosities are on the way
+  empty_text: Experiments and side quests that do not fit a single discipline will appear here.

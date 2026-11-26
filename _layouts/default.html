@@ -15,6 +15,8 @@
         t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
       document.documentElement.setAttribute('data-theme', t);
+      /* Motion: follows the system unless the visitor chose full or calm motion with the footer switch. */
+      try { var mo = localStorage.getItem('motion'); if (mo === 'full' || mo === 'calm') document.documentElement.setAttribute('data-motion', mo); } catch (e) {}
       document.documentElement.classList.add('js');
     })();
   </script>
@@ -25,7 +27,7 @@
   <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300..800;1,6..12,300..800&family=Noto+Serif:ital,wght@0,400..700;1,400..600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300..800;1,6..12,300..800&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=JetBrains+Mono:wght@400..700&display=swap">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   {% feed_meta %}
   {% if page.math %}<link rel="stylesheet" href="{{ '/assets/katex/katex.min.css' | relative_url }}">{% endif %}

@@ -1,0 +1,99 @@
+# PROFESSIONAL COURSE CATALOG: control panel
+#
+# One line per course. Edit a line, commit, done.
+#   available: true   -> listed in the catalog and on the Teaching page
+#   available: false  -> hidden from every list and count (its page stays reachable by direct link,
+#                        marked "not currently offered" and kept out of search engines)
+#   status: Active    -> normal
+#   status: Upcoming  -> listed with an "Upcoming" badge
+#
+# hours is the default duration shown on every course; give a course its own with  hours: 24  in its _courses file
+# Codes are 4 letters + 3 digits. Course content (summary, outcomes, outline, prerequisites, icon) lives in _courses/<code>.md, e.g. _courses/pyth-101.md.
+# Icons: a course about ONE specific language, framework/library or software gets its brand logo from
+#   https://thesvg.org (set  icon: <slug>  in the course file). Every other course gets a plain UI icon
+#   (set  symbol: <name>  using a file name from _includes/icons/ui/, e.g. brain, eye, bot, database; these are
+#   thesvg.org's own UI icons: glass look, weight 1, round corners, plain ends).
+#   The gallery card is tinted with the icon's dominant colour (see _data/icon_colors.yml).
+# Categories (set in the course file): Programming | Office tools | Artificial Intelligence | Data & Analytics | Web Development | CS theory
+# Levels: Foundational | Intermediate | Advanced | Specialized
+# Offered in: in-person | online | self-paced. Optional per course, here, e.g.
+#   PYTH 101:  { available: true, status: Active, modes: [online, self-paced] }
+# Retired courses live in _archive/courses/ and are not built.
+#
+# New course: copy any file in _courses/, change code and text, then add its code below.
+defaults:
+  hours: 30
+
+courses:
+  # Programming
+  PYTH 101:   { available: true, status: Active }   # Python for Automation & Data Handling
+  PYTH 201:   { available: true, status: Active }   # Object-Oriented Python, APIs & Testing
+  PYTH 301:   { available: true, status: Active }   # Production Python, Concurrency & Software Architecture
+  JSCR 101:   { available: true, status: Active }   # Modern JavaScript (ES6+), DOM & Async Fundamentals
+  JSCR 201:   { available: true, status: Active }   # TypeScript for Scalable Applications
+  JAVA 101:   { available: true, status: Active }   # Core Java Programming & Problem Solving
+  JAVA 201:   { available: true, status: Active }   # Object-Oriented Enterprise Design & Collections
+  JAVA 301:   { available: true, status: Active }   # Multithreading, JVM Performance & Design Patterns
+
+  # Office tools
+  EXCL 101:   { available: true, status: Active }   # Business Spreadsheets, Core Formulas & Charts
+  EXCL 201:   { available: true, status: Active }   # Business Intelligence, PivotTables & Dynamic Lookups
+  EXCL 301:   { available: true, status: Active }   # Financial Modeling, Power Query & VBA Automation
+  PPTX 101:   { available: true, status: Active }   # Executive Presentation Design, Data Storytelling & Pitch Decks
+  WORD 101:   { available: true, status: Active }   # Professional Document Design, Templates & Styles
+  WORD 201:   { available: true, status: Active }   # Corporate Reporting, Proposals & Administrative Workflows
+  WORD 202:   { available: true, status: Active }   # Long-Form Technical Documentation, Theses & Academic Publishing
+  LTEX 101:   { available: true, status: Active }   # LaTeX Essentials, Scientific Typesetting & Document Structure
+  LTEX 201:   { available: true, status: Active }   # Academic Publishing, Bibliographies, TikZ Diagrams & Beamer Decks
+  LTEX 301:   { available: true, status: Active }   # Custom Class Design, Macros & Automated Report Pipelines
+
+  # Artificial Intelligence
+  AIPR 101:   { available: true, status: Active }   # Enterprise AI Literacy, LLM Mechanics & Data Privacy
+  AIPR 201:   { available: true, status: Active }   # Prompt Engineering & Daily Office Productivity Workflows
+  AIPR 202:   { available: true, status: Active }   # AI-Assisted Research, Reporting & Data Analysis
+  AIPR 301:   { available: true, status: Active }   # No-Code AI Agents & Workflow Automation
+  AICS 201:   { available: true, status: Active }   # Applied Machine Learning & Deep Learning Foundations
+  AICS 301:   { available: true, status: Active }   # Natural Language Processing (NLP) & Transformer Models
+  AICS 302:   { available: true, status: Active }   # Computer Vision & Deep Visual Models
+  AICS 303:   { available: true, status: Active }   # Enterprise RAG Systems, Vector Databases & LLM Fine-Tuning
+  AICS 401:   { available: true, status: Active }   # Agentic Coding Workflows, Tool Calling & Multi-Agent Systems
+
+  # Data & Analytics
+  DATA 101:   { available: true, status: Active }   # Data Analysis Fundamentals: Asking Questions, Data Types & Descriptive Statistics
+  PYDA 101:   { available: true, status: Active }   # NumPy & Pandas Essentials: Tables, Arrays & Grouped Summaries
+  SQLX 101:   { available: true, status: Active }   # SQL for Analysts: Querying, Joins & Aggregation
+  PYDA 201:   { available: true, status: Active }   # Data Wrangling & Cleaning with Pandas
+  PYDA 202:   { available: true, status: Active }   # Exploratory Data Analysis (EDA) with Pandas, Matplotlib & Seaborn
+  PYDA 203:   { available: true, status: Active }   # Data Visualization & Storytelling with Matplotlib, Seaborn & Plotly
+  DATA 201:   { available: true, status: Active }   # Statistics for Analysts: Sampling, Confidence & Hypothesis Tests
+  PWBI 201:   { available: true, status: Active }   # Dashboards & Business Reporting with Power BI
+  PYDA 301:   { available: true, status: Active }   # Time Series Analysis & Forecasting
+  PYDA 302:   { available: true, status: Active }   # Regression, Experimentation & A/B Testing
+  PYDA 303:   { available: true, status: Active }   # Analysis at Scale: Larger-than-Memory Data with Polars & DuckDB
+  DATA 301:   { available: true, status: Active }   # Automated Reporting & Analytics Pipelines with Streamlit
+  PYDA 401:   { available: true, status: Active }   # Image & Scientific Data Analysis with NumPy, SciPy & scikit-image
+  DATA 401:   { available: true, status: Active }   # Domain Analytics Workshop: Your Data, Your Questions
+
+  # Web Development
+  WEBD 101:   { available: true, status: Active }   # HTML, CSS & Responsive Layout
+  REAC 101:   { available: true, status: Active }   # React Fundamentals: Components, Props, State & Hooks
+  REAC 201:   { available: true, status: Active }   # React in Practice: Routing, Data Fetching, Forms & Testing
+  REAC 301:   { available: true, status: Active }   # Production React: Performance, Server Rendering & Architecture
+  ANGL 101:   { available: true, status: Active }   # Angular Fundamentals: Components, Templates & TypeScript
+  ANGL 201:   { available: true, status: Active }   # Angular Applications: Routing, Forms, Services & RxJS
+  ANGL 301:   { available: true, status: Active }   # Enterprise Angular: Signals, State Management, Performance & Testing
+  FLSK 101:   { available: true, status: Active }   # Flask: Web Apps & APIs from Scratch
+  FLSK 201:   { available: true, status: Active }   # Flask in Practice: Databases, Authentication, Blueprints & Testing
+  DJNG 101:   { available: true, status: Active }   # Django Fundamentals: Models, Views, Templates & Admin
+  DJNG 201:   { available: true, status: Active }   # Django REST & Production: APIs, Authentication & Deployment
+  FAPI 101:   { available: true, status: Active }   # FastAPI: Modern Async APIs
+  FAPI 201:   { available: true, status: Active }   # FastAPI in Production: Databases, Authentication, Testing & Deployment
+  WEBD 401:   { available: true, status: Active }   # Full-Stack Project: React or Angular Front End with a Python API
+
+  # Artificial Intelligence
+  VIBE 101:   { available: true, status: Active }   # Vibe Coding Foundations: Build Working Tools with AI, No Coding Background
+  VIBE 201:   { available: true, status: Active }   # From Idea to Deployed Web App with AI Assistance
+  VIBE 202:   { available: true, status: Active }   # AI-Assisted Software Development: Pair Programming with Coding Assistants
+  VIBE 301:   { available: true, status: Active }   # Reviewing, Testing & Securing AI-Generated Code
+  VIBE 302:   { available: true, status: Active }   # Spec-Driven & Agentic Development for Teams
+  VIBE 401:   { available: true, status: Active }   # Vibe Coding Workshop: Build Your Team's Internal Tool

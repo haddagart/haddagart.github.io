@@ -1,7 +1,15 @@
 ---
 layout: browse
 title: Professional courses
-description: "Catalog of professional courses by Haddag Abdelkader: Python, JavaScript, Java, Excel and mathematics. Search, filter by in-person, online or hybrid, and request a course for your team."
+description: "Catalog of professional courses by Abdelkader Haddag: Python, JavaScript, Java, Office tools, LaTeX, data analysis, web development and AI. Search, filter by track, level or format, and request a course for your team."
 ---
-{%- assign list = site.courses | where: "kind", "professional" | sort: "title" -%}
-{% include works-browser.html kind="courses" entries=list scope="all" custom="true" facets="modes|How it runs;format|Type;levels|Level;topics|Topic" %}
+{%- comment -%} Which courses are listed is controlled in _data/catalog.yml (available: true / false). {%- endcomment -%}
+{%- assign list = site.courses | where: "kind", "professional" | sort: "order" -%}
+{%- assign n = 0 -%}
+{%- for c in list -%}{%- assign cat = site.data.catalog.courses[c.code] -%}{%- unless cat.available == false -%}{%- assign n = n | plus: 1 -%}{%- endunless -%}{%- endfor -%}
+<aside class="notice notice--top notice--slim" role="note" aria-label="Work in progress">
+  {% include icon.html name="compass" %}
+  <p><strong>Work in progress.</strong> This catalog is still being refined. Calls to teach are closed for now and reopen in May 2027.</p>
+</aside>
+
+{% include works-browser.html kind="courses" entries=list count=n scope="all" custom="true" facets="category|Category;levels|Level;modes|Offered in;topics|Topic" %}

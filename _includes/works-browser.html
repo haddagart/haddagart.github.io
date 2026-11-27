@@ -3,17 +3,18 @@
 {%- assign e_custom = include.custom -%}
 {%- assign e_facets = include.facets -%}
 {%- if e_kind == "projects" -%}{%- assign items = include.projects -%}{%- else -%}{%- assign items = include.entries -%}{%- endif -%}
+{%- assign e_n = include.count | default: items.size -%}
 {%- if e_kind == "courses" -%}{%- assign noun = "course" -%}{%- assign nouns = "courses" -%}{%- elsif e_kind == "talks" -%}{%- assign noun = "talk" -%}{%- assign nouns = "talks" -%}{%- else -%}{%- assign noun = "project" -%}{%- assign nouns = "projects" -%}{%- endif -%}
 <div class="works" data-works data-scope="{{ include.scope }}" data-ns="{{ e_kind }}"{% if e_facets %} data-facets-cfg="{{ e_facets }}"{% endif %} data-view="list">
   <div class="wtools">
-    <p class="wtools__count" aria-live="polite"><b data-n>{{ items.size }}</b> of {{ items.size }} {% if items.size == 1 %}{{ noun }}{% else %}{{ nouns }}{% endif %}</p>
+    <p class="wtools__count" aria-live="polite"><b data-n>{{ e_n }}</b> of {{ e_n }} {% if e_n == 1 %}{{ noun }}{% else %}{{ nouns }}{% endif %}</p>
     <div class="wtools__right">
       <label class="catalog__search wtools__search"><span class="sr-only">Search {{ nouns }}</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
         <input type="search" placeholder="Search {{ nouns }}" data-q autocomplete="off">
       </label>
       <label class="wsort"><span class="sr-only">Sort by</span>
-        {% if e_kind == "courses" %}<select data-sort><option value="az">A to Z</option><option value="za">Z to A</option></select>{% elsif e_kind == "talks" %}<select data-sort><option value="new">Newest first</option><option value="old">Oldest first</option><option value="az">A to Z</option></select>{% else %}<select data-sort><option value="new">Newest first</option><option value="old">Oldest first</option><option value="az">A to Z</option></select>{% endif %}
+        {% if e_kind == "courses" %}<select data-sort>{% if e_custom %}<option value="cat">Catalog order</option>{% endif %}<option value="az">A to Z</option><option value="za">Z to A</option></select>{% elsif e_kind == "talks" %}<select data-sort><option value="new">Newest first</option><option value="old">Oldest first</option><option value="az">A to Z</option></select>{% else %}<select data-sort><option value="new">Newest first</option><option value="old">Oldest first</option><option value="az">A to Z</option></select>{% endif %}
       </label>
       <div class="wview" role="group" aria-label="View">
         <button type="button" data-view-btn="list" aria-pressed="true" aria-label="List view" title="List"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></button>
@@ -36,7 +37,7 @@
         <button type="button" class="btn btn--primary btn--sm" data-open-modal="custom-modal"><span>Request a course</span>{% include icon.html name="arrow-right" %}</button>
       </div>
       {%- endif %}
-      <div class="wside__foot"><button type="button" class="btn btn--primary" data-fdone>Show <span data-fshown>{{ items.size }}</span> {{ nouns }}</button></div>
+      <div class="wside__foot"><button type="button" class="btn btn--primary" data-fdone>Show <span data-fshown>{{ e_n }}</span> {{ nouns }}</button></div>
     </aside>
     <div class="wmain">
       <ul class="wlist" data-list>

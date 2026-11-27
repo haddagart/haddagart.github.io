@@ -1,11 +1,12 @@
 ---
 layout: research
 title: Teaching
-description: "Teaching by Haddag Abdelkader: university courses at USTOMB, professional training for companies and institutes, and lectures and talks, in person and online."
+description: "Teaching by Abdelkader Haddag: university courses at USTOMB, professional training for companies and institutes, and lectures and talks, in person and online."
 ---
 {%- assign talks = site.data.teaching.talks -%}
 {%- assign academic = site.courses | where: "kind", "academic" | size -%}
-{%- assign professional = site.courses | where: "kind", "professional" | size -%}
+{%- assign professional = 0 -%}
+{%- for c in site.courses -%}{%- if c.kind == "professional" -%}{%- assign cat = site.data.catalog.courses[c.code] -%}{%- unless cat.available == false -%}{%- assign professional = professional | plus: 1 -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
 <p class="research__intro">I teach by example: a concrete problem first, the theory when it's needed. Here's where I've taught, trained and spoken, and whether it was in person or online.</p>
 
 <section aria-labelledby="tmap">

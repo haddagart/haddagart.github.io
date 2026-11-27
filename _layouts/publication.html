@@ -43,9 +43,11 @@ layout: default
           <li><a class="btn btn--ghost btn--sm" href="{{ '/research/contributions/' | relative_url }}">{% include icon.html name="microscope" %}<span>More contributions</span></a></li>
         </ul>
         {%- assign e_pub = page.publisher -%}{%- if page.type == 'conference' or page.type == 'thesis' %}{%- assign e_pub = nil -%}{%- endif %}
-        {%- if e_pub or page.editors %}
+        {%- if e_pub or page.editors or page.special_issue or page.license %}
         <dl class="facts">
           {% if e_pub %}<dt class="is-block">Publisher</dt><dd class="is-block">{{ e_pub }}</dd>{% endif %}
+          {% if page.special_issue %}<dt class="is-block">Special issue</dt><dd class="is-block">{{ page.special_issue }}</dd>{% endif %}
+          {% if page.license %}<dt class="is-block">Access</dt><dd class="is-block">{{ page.license }}</dd>{% endif %}
           {% if page.editors %}<dt class="is-block">Editors</dt><dd class="is-block">{{ page.editors | join: ', ' }}</dd>{% endif %}
         </dl>
         {%- endif %}

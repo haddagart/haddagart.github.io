@@ -15,7 +15,7 @@ Our paper, titled “**[Comparative Analysis of Spiking Neurons Mathematical Mod
 This contribution reflects our ongoing commitment to exploring bio-inspired, energy-efficient alternatives to conventional deep learning — a direction that aligns closely with sustainable and cutting-edge AI research.
 
 <figure>
-  <img src="{{ '/assets/img/news/iwann-2025-talk.webp' | relative_url }}" width="705" height="529" alt="Haddag Abdelkader presenting at a podium beside a slide on related work and research gaps" loading="lazy">
+  <img src="{{ '/assets/img/news/iwann-2025-talk.webp' | relative_url }}" width="705" height="529" alt="Abdelkader Haddag presenting at a podium beside a slide on related work and research gaps" loading="lazy">
   <figcaption>Me presenting our work</figcaption>
 </figure>
 
@@ -32,7 +32,7 @@ I also extend our heartfelt thanks to the **Erasmus+** program, whose funding an
 Our appreciation goes as well to the administrative staff at the **University of Sciences and Technology of Oran – Mohamed Boudiaf (USTO-MB)**, whose support made it possible to attend and present at IWANN 2025 in person.
 
 <figure>
-  <img src="{{ '/assets/img/news/iwann-2025-award.webp' | relative_url }}" width="705" height="529" alt="Haddag Abdelkader holding the best presentation certificate next to a colleague, in front of a projected screen" loading="lazy">
+  <img src="{{ '/assets/img/news/iwann-2025-award.webp' | relative_url }}" width="705" height="529" alt="Abdelkader Haddag holding the best presentation certificate next to a colleague, in front of a projected screen" loading="lazy">
   <figcaption>Me receiving best presentation award</figcaption>
 </figure>
 

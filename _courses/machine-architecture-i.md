@@ -1,6 +1,8 @@
 ---
 title: "Machine Architecture I"
 kind: academic
+symbol: cpu
+category: "CS theory"
 role: "Teaching assistant and sections"
 modes: [in-person]
 topics: ["Computer architecture", "Number systems", "Boolean logic"]

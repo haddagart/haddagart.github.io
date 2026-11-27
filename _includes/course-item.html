@@ -1,11 +1,31 @@
 {%- assign c = include.course -%}
+{%- assign cat = site.data.catalog.courses[c.code] -%}
+{%- unless cat.available == false -%}
 {%- assign e_lv = c.levels | join: "|" -%}
-<li class="work" data-work data-title="{{ c.title | downcase | escape }}" data-modes="{{ c.modes | join: '|' }}" data-format="{{ c.format | escape }}" data-levels="{{ e_lv | escape }}" data-topics="{{ c.topics | join: '|' | escape }}">
-  <a class="work__media" href="{{ c.url | relative_url }}" tabindex="-1" aria-hidden="true"><span class="work__mark"><b>{{ c.title | slice: 0, 1 | upcase }}</b></span></a>
+{%- assign e_modes = cat.modes | default: c.modes -%}
+{%- assign e_hours = c.hours | default: site.data.catalog.defaults.hours -%}
+{%- assign e_key = c.icon | default: c.symbol -%}
+{%- assign e_tint = c.tint | default: site.data.icon_colors[c.icon] | default: site.data.icon_colors.categories[c.category] | default: "#B18558" -%}
+<li class="work work--c" style="--tint: {{ e_tint }}" data-work data-title="{{ c.title | downcase | escape }}" data-code="{{ c.code | downcase }}" data-order="{{ c.order }}" data-modes="{{ e_modes | join: '|' }}" data-format="{{ c.format | escape }}" data-category="{{ c.category | escape }}" data-levels="{{ e_lv | escape }}" data-topics="{{ c.topics | join: '|' | escape }}">
+{%- if c.code -%}
+  <a class="work__media" href="{{ c.url | relative_url }}" tabindex="-1" aria-hidden="true">{% include course-logo.html course=c %}</a>
+  <span class="ccode">{{ c.code }}</span>
   <div class="work__body">
     <h3 class="work__title"><a href="{{ c.url | relative_url }}">{{ c.title }}</a></h3>
     <p class="work__summary">{{ c.summary }}</p>
-    <p class="work__meta">{% include mode-badges.html modes=c.modes %}<span>{{ c.format }}{% if c.levels.size > 0 %} · {{ c.levels | join: ", " }}{% endif %}</span></p>
+    <div class="cfacts">{% if cat.status == 'Upcoming' %}<span class="cbadge">Upcoming</span>{% endif %}<span class="cfacts__row">{% for lv in c.levels %}{% include level-meter.html level=lv %}{% endfor %}<span class="cdur" title="Duration"><svg class="ti__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>{{ e_hours }} h</span></span><span class="cfacts__modes">{% include mode-badges.html modes=e_modes %}</span></div>
   </div>
   <span class="work__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+{%- else -%}
+  {%- assign e_org1 = c.clients | first -%}{%- assign e_od = site.data.orgs | where: "key", e_org1.org | first -%}
+  <a class="work__media" href="{{ c.url | relative_url }}" tabindex="-1" aria-hidden="true">{% include course-logo.html course=c %}</a>
+  {%- if e_od.short %}<span class="ccode ccode--tag">{{ e_od.short }}</span>{% endif %}
+  <div class="work__body">
+    <h3 class="work__title"><a href="{{ c.url | relative_url }}">{{ c.title }}</a>{% if cat.status == 'Upcoming' %}<span class="cbadge">Upcoming</span>{% endif %}</h3>
+    <p class="work__summary">{{ c.summary }}</p>
+    <div class="cfacts"><span class="cfacts__row">{% for lv in c.levels %}{% include level-meter.html level=lv %}{% endfor %}{% if c.format %}<span>{{ c.format }}</span>{% endif %}</span><span class="cfacts__modes">{% include mode-badges.html modes=e_modes %}</span></div>
+  </div>
+  <span class="work__go" aria-hidden="true">{% include icon.html name="arrow-right" %}</span>
+{%- endif -%}
 </li>
+{%- endunless -%}

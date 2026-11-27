@@ -1,0 +1,5 @@
+{%- comment -%} A four-step level meter next to the level name. Params: level (Foundational | Intermediate | Advanced | Specialized). Any other level shows as plain text. {%- endcomment -%}
+{%- assign lv = include.level -%}
+{%- assign r = 0 -%}
+{%- if lv == "Foundational" -%}{%- assign r = 1 -%}{%- elsif lv == "Intermediate" -%}{%- assign r = 2 -%}{%- elsif lv == "Advanced" -%}{%- assign r = 3 -%}{%- elsif lv == "Specialized" -%}{%- assign r = 4 -%}{%- endif -%}
+{%- if r > 0 -%}<span class="lvl" data-lvl="{{ r }}" title="Level {{ r }} of 4: {{ lv }}"><span class="lvl__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="lvl__name">{{ lv }}</span></span>{%- else -%}<span>{{ lv }}</span>{%- endif -%}

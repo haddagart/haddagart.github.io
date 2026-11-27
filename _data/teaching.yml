@@ -1,5 +1,5 @@
 # Guest lectures and talks only (no conferences or symposiums).
-# modes: list of in-person | online | hybrid. Optional: slides, recording (URLs, shown only if set).
+# modes: list of in-person | online | hybrid. Optional: event, event_url, slides, recording, record (other link, e.g. ResearchGate) (URLs, shown only if set).
 talks:
   - title: "A Dive into Machine Learning – A Guide for Future Researchers and Engineers"
     type: "Guest lecture"
@@ -7,3 +7,11 @@ talks:
     place: "Escuela Superior de Ingeniería, Universidad de Cádiz"
     audience: "final-year Master's students"
     date: 2025-01-15
+  - title: "Multimodal Learning and its Applications"
+    type: Talk
+    date: 2023-04-18
+    place: "University of Sciences and Technology of Oran - Mohamed Boudiaf (USTOMB)"
+    event: "Week of Artificial Intelligence"
+    event_url: "https://www.univ-usto.dz/ai-week/"
+    modes: [in-person]
+    record: "https://www.researchgate.net/publication/385710908_Multimodal_Learning_and_its_Applications"

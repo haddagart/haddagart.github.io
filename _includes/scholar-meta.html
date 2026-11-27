@@ -17,6 +17,9 @@
 {%- if page.volume %}
 <meta name="citation_volume" content="{{ page.volume | escape }}">
 {%- endif %}
+{%- if page.issue %}
+<meta name="citation_issue" content="{{ page.issue | escape }}">
+{%- endif %}
 {%- if page.pages %}
 <meta name="citation_firstpage" content="{{ page.pages | split: '–' | first | escape }}">
 {%- endif %}
@@ -45,7 +48,10 @@
   "sameAs": "https://doi.org/{{ page.doi }}",
   "identifier": {"@type": "PropertyValue", "propertyID": "DOI", "value": {{ page.doi | jsonify }}},
   {%- endif %}
-  "isPartOf": {"@type": "Periodical", "name": {{ page.venue | jsonify }}},
+  "isPartOf": {"@type": "Periodical", "name": {{ page.venue | jsonify }}{% if page.volume %}, "volumeNumber": {{ page.volume | jsonify }}{% endif %}{% if page.issue %}, "issueNumber": {{ page.issue | jsonify }}{% endif %}},
+  {%- if page.license %}
+  "isAccessibleForFree": true,
+  {%- endif %}
   "publisher": {"@type": "Organization", "name": {{ page.publisher | default: page.venue | jsonify }}}
 }
 </script>

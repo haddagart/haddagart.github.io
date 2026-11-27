@@ -1,7 +1,7 @@
 ---
 layout: projects
 title: All projects
-description: "All projects by Haddag Abdelkader: software, design and curiosities."
+description: "All projects by Abdelkader Haddag: software, design and curiosities."
 stub: true
 sitemap: false
 ---

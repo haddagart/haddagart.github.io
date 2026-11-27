@@ -1,17 +1,20 @@
 <form class="reqform" data-request data-subject="{{ include.course | default: 'Custom course' }}" data-user="{{ site.affiliation.email_user }}" data-domain="{{ site.affiliation.email_domain }}" novalidate>
-  <p class="reqform__lead">Tell me about your team and I'll reply with a proposed syllabus, duration and format.</p>
+  <p class="reqform__lead">Tell me who the course is for and what you want to achieve. I'll reply with a proposed syllabus, dates and format.</p>
   <div class="reqform__grid">
+    <label>This course is for
+      <select name="who"><option>my team or company</option><option>myself</option></select>
+    </label>
     <label>Your name<input name="name" type="text" autocomplete="name" required></label>
     <label>Your email<input name="email" type="email" autocomplete="email" required></label>
-    <label>Organisation<input name="org" type="text" autocomplete="organization"></label>
+    <label>Organisation (if any)<input name="org" type="text" autocomplete="organization"></label>
     <label>Participants<input name="size" type="text" inputmode="numeric" placeholder="e.g. 12"></label>
     <label>How would you like it run?
       <select name="mode"><option>In person</option><option>Online</option><option>Hybrid</option><option>No preference</option></select>
     </label>
     <label>Target dates<input name="dates" type="text" placeholder="e.g. March 2027"></label>
   </div>
-  <label>What should your team be able to do afterwards?<textarea name="goals" rows="4"></textarea></label>
-  <p class="reqform__actions"><button class="btn btn--primary" type="submit"><span>Send request</span>{% include icon.html name="arrow-right" %}</button></p>
+  <label>What should you or your team be able to do afterwards?<textarea name="goals" rows="4"></textarea></label>
+  <p class="reqform__actions"><button class="btn btn--primary" type="submit"><span>Request this course</span>{% include icon.html name="arrow-right" %}</button></p>
   <p class="reqform__note" role="status" aria-live="polite">This opens your email app with the request filled in, so nothing is stored on this site.</p>
   <noscript><p class="reqform__note">JavaScript is off: write to {{ site.affiliation.email_user }} [at] {{ site.affiliation.email_domain }} instead.</p></noscript>
 </form>

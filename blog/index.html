@@ -1,7 +1,7 @@
 ---
 layout: research
 title: Articles
-description: "Articles by Haddag Abdelkader on artificial intelligence, research and teaching. Browse by month or search."
+description: "Articles by Abdelkader Haddag on artificial intelligence, research and teaching. Browse by month or search."
 ---
 {%- assign list = site.posts | where_exp: "p", "p.series == nil" | where_exp: "p", "p.type != 'journal'" -%}
 {% if list.size > 0 %}

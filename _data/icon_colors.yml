@@ -1,0 +1,29 @@
+# Tint of each course card in the gallery view (the glass effect).
+# The browser reads the real dominant colour from the logo when it loads; these values are what shows
+# before that, and what UI icons use. Key = thesvg slug (icon:) or UI icon name (symbol:). Optional per course: tint: "#RRGGBB".
+python: "#3776AB"
+javascript: "#F7DF1E"
+typescript: "#3178C6"
+java: "#E76F00"
+microsoft-excel: "#217346"
+microsoft-word: "#2B579A"
+microsoft-powerpoint: "#D24726"
+latex: "#008080"
+pandas: "#150458"
+react: "#2AA7C9"
+angular: "#DD0031"
+django: "#0C4B33"
+flask: "#3B3B3B"
+fastapi: "#009688"
+microsoft-power-bi: "#F2C811"
+# UI icons take the colour of their category
+categories:
+  "Programming": "#3776AB"
+  "Office tools": "#217346"
+  "Artificial Intelligence": "#7C6BD6"
+  "Data & Analytics": "#2A9D8F"
+  "Web Development": "#D1603D"
+  "CS theory": "#B18558"
+  "Software": "#3F7CAC"
+  "Design": "#B8527A"
+  "Curiosities": "#D1A03D"

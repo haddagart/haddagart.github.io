@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Projects
-description: "Projects by Haddag Abdelkader across software, design and curiosities: an aspiring polymath's workbench."
+description: "Projects by Abdelkader Haddag across software, design and curiosities: an aspiring polymath's workbench."
 stub: true
 sitemap: false
 ---

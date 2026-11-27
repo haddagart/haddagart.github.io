@@ -1,26 +1,50 @@
 ---
 layout: default
 ---
+{%- assign cat = site.data.catalog.courses[page.code] -%}
+{%- assign e_modes = cat.modes | default: page.modes -%}
+{%- assign e_tint = page.tint | default: site.data.icon_colors[page.icon] | default: site.data.icon_colors.categories[page.category] | default: "#B18558" -%}
 {%- assign back = '/teaching/academic-courses/' -%}{%- if page.kind == 'professional' %}{% assign back = '/teaching/professional-courses/' %}{% endif -%}
 <article class="pubpage supvpage">
   <header class="page-hero">
     <div class="wrap">
       <a class="backlink" href="{{ back | relative_url }}">{% include icon.html name="arrow-left" %}<span>{% if page.kind == 'professional' %}All professional courses{% else %}All academic courses{% endif %}</span></a>
-      <p class="eyebrow">{% if page.kind == 'professional' %}{{ page.format }}{% else %}{{ page.levels | join: ", " }} · {{ page.format }}{% endif %}</p>
-      <h1>{{ page.title }}</h1>
-      <p class="supvpage__meta">{% include mode-badges.html modes=page.modes %}</p>
-      <p class="lead">{{ page.summary }}</p>
+      <div class="coursehero">
+        <div class="workpage__logo" aria-hidden="true" style="--tint: {{ e_tint }}">{% include course-logo.html course=page %}</div>
+        <div class="coursehero__text">
+          <p class="eyebrow">{% if page.track %}{{ page.track }}{% else %}{{ page.format }}{% endif %}{% if cat.status == 'Upcoming' %}<span class="cbadge">Upcoming</span>{% endif %}</p>
+          <h1>{{ page.title }}</h1>
+          {% if page.topics %}<ul class="chips chips--sm coursekw" aria-label="Keywords">{% for t in page.topics %}<li class="chip">{{ t }}</li>{% endfor %}</ul>{% endif %}
+          {% if page.request %}<p class="coursehero__cta"><a class="btn btn--primary btn--sm" href="#request" data-who="my team or company"><span>Train my team</span>{% include icon.html name="arrow-right" %}</a><a class="btn btn--ghost btn--sm" href="#request" data-who="myself"><span>Sign me up</span></a></p>{% endif %}
+        </div>
+      </div>
     </div>
   </header>
   <div class="zigzag zigzag--top" aria-hidden="true"></div>
   <div class="wrap section">
     <div class="pubpage__grid">
       <div class="prose">
+        {%- if cat.available == false %}
+        <p class="cnotice" role="note">This course is not currently offered. <a href="{{ back | relative_url }}">See the current catalog</a>, or <a href="#request">ask whether it can run for your team</a>.</p>
+        {%- endif %}
         <h2 id="about">About the course</h2>
+        {% if page.kind == 'academic' %}<p>{{ page.summary }}</p>{% endif %}
         {{ content }}
+        {% if page.outcomes %}
+        <h2 id="outcomes">What you will be able to do by the end of this course</h2>
+        <ul class="outcomes">{% for o in page.outcomes %}<li>{{ o }}</li>{% endfor %}</ul>
+        {% endif %}
         {% if page.outline %}
-        <h2 id="outline">What it covers</h2>
-        <ol class="outline">{% for o in page.outline %}<li>{{ o }}</li>{% endfor %}</ol>
+        <h2 id="outline">{% if page.kind == 'professional' %}What's in the course{% else %}What it covers{% endif %}</h2>
+        {% if page.kind == 'professional' %}<ul class="covers">{% for o in page.outline %}<li>{{ o }}</li>{% endfor %}</ul>{% else %}<ol class="outline">{% for o in page.outline %}<li>{{ o }}</li>{% endfor %}</ol>{% endif %}
+        {% endif %}
+        {% if page.kind == 'professional' %}
+        <h2 id="prerequisites">Technical prerequisites</h2>
+        <dl class="prereq">
+          <dt>Audience</dt><dd>{{ page.audience }}</dd>
+          <dt>Prerequisite knowledge</dt><dd>{{ page.knowledge }}</dd>
+          <dt>Recommended courses to take before this</dt><dd>{% if page.prereq.size > 0 %}{% for pr in page.prereq %}{% assign pc = site.data.catalog.courses[pr] %}{% if pc.available == false %}<span class="ccode">{{ pr }}</span>{% else %}<a class="ccode" href="{{ '/teaching/courses/' | append: pr | downcase | replace: ' ', '-' | append: '/' | relative_url }}">{{ pr }}</a>{% endif %}{% unless forloop.last %}{% if page.prereq_any %} or {% else %} and {% endif %}{% endunless %}{% endfor %}{% else %}None. This is a starting point.{% endif %}</dd>
+        </dl>
         {% endif %}
         {% if page.kind == 'academic' %}
         <h2 id="resources">Course resources</h2>
@@ -34,29 +58,37 @@ layout: default
         <p class="resources__empty">Lecture notes, tutorial sheets and past exams will be posted here. Enrolled students will also find them on the course space.</p>
         {% endif %}
         {% endif %}
-        {% if page.topics %}<h2 id="topics">Topics</h2><ul class="chips">{% for t in page.topics %}<li class="chip">{{ t }}</li>{% endfor %}</ul>{% endif %}
         {% if page.clients and page.clients.size > 0 %}
         <h2 id="clients">{% if page.kind == 'professional' %}Clients who requested this course{% else %}Taught at{% endif %}</h2>
         <ul class="clients">{% for cl in page.clients %}<li>{% include org-badge.html org=cl.org sz="lg" %}</li>{% endfor %}</ul>
         {% endif %}
         {% if page.request %}
-        <h2 id="request">Request this course</h2>
-        {% include course-request.html course=page.title %}
+        <h2 id="request">Get this course for yourself or your business</h2>
+        {% assign req_subject = page.title %}{% if page.code %}{% assign req_subject = page.code | append: " " | append: page.title %}{% endif %}
+        {% include course-request.html course=req_subject %}
+        {% endif %}
+        {% if page.similar.size > 0 %}
+        <h2 id="similar">Similar courses</h2>
+        <ul class="works simcourses" data-view="list">
+          {% for sc in page.similar %}{% assign sd = site.courses | where: "code", sc | first %}{% if sd %}{% include course-item.html course=sd %}{% endif %}{% endfor %}
+        </ul>
         {% endif %}
       </div>
       <aside class="pubpage__side" aria-label="Course details">
         <dl class="facts">
-          <dt>Offered</dt><dd class="facts__modes">{% include mode-badges.html modes=page.modes %}</dd>
-          <dt>Type</dt><dd>{{ page.format }}</dd>
-          {% if page.levels.size > 0 %}<dt>Level</dt><dd>{{ page.levels | join: ", " }}</dd>{% endif %}
-          <dt>My role</dt><dd>{{ page.role }}</dd>
+          {% if page.code %}<dt>Code</dt><dd><span class="ccode">{{ page.code }}</span></dd>{% endif %}
+          <dt>Offered in</dt><dd class="facts__modes">{% include mode-badges.html modes=e_modes %}</dd>
+          {% if page.category %}<dt>Category</dt><dd>{{ page.category }}</dd>{% endif %}
+          {% if page.levels.size > 0 %}<dt>Level</dt><dd>{% for lv in page.levels %}{% include level-meter.html level=lv %}{% endfor %}</dd>{% endif %}
+          {% if page.code %}<dt>Duration</dt><dd>{{ page.hours | default: site.data.catalog.defaults.hours }} hours</dd>{% endif %}
         </dl>
         <ul class="linklist">
-          {% if page.request %}<li><a class="btn btn--primary btn--sm" href="#request"><span>Request this course</span>{% include icon.html name="arrow-right" %}</a></li>{% endif %}
+          {% if page.request %}<li><a class="btn btn--primary btn--sm" href="#request" data-who="my team or company"><span>Train my team</span>{% include icon.html name="arrow-right" %}</a></li>
+          <li><a class="btn btn--ghost btn--sm" href="#request" data-who="myself"><span>Sign me up</span></a></li>{% endif %}
           <li><a class="btn btn--ghost btn--sm" href="{{ back | relative_url }}">{% include icon.html name="arrow-left" %}<span>Back to catalog</span></a></li>
         </ul>
       </aside>
     </div>
   </div>
 </article>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":{{ page.title | jsonify }},"description":{{ page.summary | jsonify }},"url":"{{ page.url | absolute_url }}","provider":{"@type":"Person","name":"Haddag Abdelkader","url":"{{ '/' | absolute_url }}"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":[{% for m in page.modes %}"{% if m == 'online' %}Online{% elsif m == 'hybrid' %}Blended{% else %}Onsite{% endif %}"{% unless forloop.last %},{% endunless %}{% endfor %}]}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":{{ page.title | jsonify }},"description":{{ page.summary | jsonify }},{% if page.topics %}"keywords":{{ page.topics | join: ", " | jsonify }},{% endif %}{% if page.code %}"courseCode":{{ page.code | jsonify }},{% endif %}"url":"{{ page.url | absolute_url }}","provider":{"@type":"Person","name":"Abdelkader Haddag","url":"{{ '/' | absolute_url }}"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":[{% for m in page.modes %}"{% if m == 'online' %}Online{% elsif m == 'hybrid' %}Blended{% else %}Onsite{% endif %}"{% unless forloop.last %},{% endunless %}{% endfor %}]}}</script>

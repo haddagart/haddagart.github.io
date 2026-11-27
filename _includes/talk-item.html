@@ -1,11 +1,19 @@
+{%- comment -%} One talk or guest lecture. Fields (_data/teaching.yml): title, type, date, place, audience, modes, event, event_url, slides, recording. {%- endcomment -%}
 {%- assign t = include.talk -%}
-{%- assign e_link = t.recording | default: t.slides -%}
-<li class="work" data-work data-title="{{ t.title | downcase | escape }}" data-date="{{ t.date | date: '%Y-%m-%d' }}" data-modes="{{ t.modes | join: '|' }}" data-type="{{ t.type | escape }}" data-year="{{ t.date | date: '%Y' }}" data-place="{{ t.place | escape }}">
+<li class="work work--c work--t" style="--tint: var(--honey)" data-work data-title="{{ t.title | downcase | escape }}" data-date="{{ t.date | date: '%Y-%m-%d' }}" data-modes="{{ t.modes | join: '|' }}" data-type="{{ t.type | escape }}" data-year="{{ t.date | date: '%Y' }}" data-place="{{ t.place | escape }}">
   <span class="work__media" aria-hidden="true"><span class="work__mark work__mark--date"><small>{{ t.date | date: "%b" }}</small><b>{{ t.date | date: "%Y" }}</b></span></span>
+  <span class="ccode ccode--tag">{{ t.type }}</span>
   <div class="work__body">
     <h3 class="work__title">{{ t.title }}</h3>
-    <p class="work__meta">{% include mode-badges.html modes=t.modes %}<span>{{ t.type }}</span><span aria-hidden="true">·</span><span>{{ t.place }}</span></p>
-    {% if t.audience %}<p class="work__summary">For {{ t.audience }}</p>{% endif %}
-    {% if t.slides or t.recording %}<p class="talk__links">{% if t.slides %}<a class="pub__btn" href="{{ t.slides }}" rel="noopener" target="_blank">Slides{% include icon.html name="external-link" %}</a>{% endif %}{% if t.recording %}<a class="pub__btn" href="{{ t.recording }}" rel="noopener" target="_blank">Recording{% include icon.html name="external-link" %}</a>{% endif %}</p>{% endif %}
+    {%- if t.event %}
+    <p class="work__summary talk__event">{% if t.event_url %}<a href="{{ t.event_url }}" rel="noopener" target="_blank">{{ t.event }}{% include icon.html name="external-link" %}</a>{% else %}{{ t.event }}{% endif %}</p>
+    {%- endif %}
+    <ul class="tfacts">
+      {%- if t.place %}<li>{% include icon.html name="map-pin" %}<span>{{ t.place }}</span></li>{% endif %}
+      {%- if t.audience %}<li>{% include icon.html name="users" %}<span>For {{ t.audience }}</span></li>{% endif %}
+    </ul>
+    {%- if t.modes.size > 0 or t.slides or t.recording %}
+    <div class="cfacts">{% if t.modes.size > 0 %}<span class="cfacts__modes">{% include mode-badges.html modes=t.modes %}</span>{% endif %}{% if t.slides or t.recording or t.record %}<span class="talk__links">{% if t.slides %}<a class="pub__btn" href="{{ t.slides }}" rel="noopener" target="_blank">Slides{% include icon.html name="external-link" %}</a>{% endif %}{% if t.recording %}<a class="pub__btn" href="{{ t.recording }}" rel="noopener" target="_blank">Recording{% include icon.html name="external-link" %}</a>{% endif %}{% if t.record %}<a class="pub__btn" href="{{ t.record }}" rel="noopener" target="_blank">ResearchGate{% include icon.html name="external-link" %}</a>{% endif %}</span>{% endif %}</div>
+    {%- endif %}
   </div>
 </li>

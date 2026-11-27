@@ -1,7 +1,7 @@
 ---
 layout: browse
 title: Academic courses
-description: "Catalog of university courses taught by Haddag Abdelkader at USTOMB, searchable and filterable (in person, online or hybrid), with a page and resources for each course."
+description: "Catalog of university courses taught by Abdelkader Haddag at USTOMB, searchable and filterable (in person, online or hybrid), with a page and resources for each course."
 ---
 {%- assign list = site.courses | where: "kind", "academic" | sort: "title" -%}
 {% include works-browser.html kind="courses" entries=list scope="all" facets="modes|How it runs;format|Type;levels|Level;topics|Topic" %}

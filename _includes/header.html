@@ -1,8 +1,8 @@
 {%- assign hasdeck = "" -%}{%- if page.url contains '/research/' %}{% assign hasdeck = " has-deck" %}{% endif -%}{%- if page.url contains '/teaching/' %}{% assign hasdeck = " has-deck" %}{% endif -%}{%- if page.url contains '/blog/' %}{% assign hasdeck = " has-deck" %}{% endif -%}{%- assign pu0 = page.url | slice: 0, 10 -%}{%- if pu0 == '/projects/' %}{% assign hasdeck = " has-deck" %}{% endif -%}
 <header class="site-header{{ hasdeck }}">
   <div class="wrap bar">
-    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Haddag Abdelkader, home">
-      {% include logo.svg %}<span class="brand__name">Haddag Abdelkader</span>
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Abdelkader Haddag, home">
+      {% include logo.svg %}<span class="brand__name">Abdelkader Haddag</span>
     </a>
     <div class="bar__tools">
       <button class="theme-toggle" type="button" aria-label="Switch theme">
